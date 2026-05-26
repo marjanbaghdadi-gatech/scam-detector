@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Medicare Scam Calls Threaten to Cancel Benefits",
+    "category": "phone_scam",
+    "date_reported": "June 2024",
+    "source": "AARP",
+    "how_it_works": "Scammers call pretending to be from Medicare, saying your benefits will be canceled unless you give them personal information. They may ask for your Medicare number, Social Security number, or banking details.",
+    "example_message": "\"This is Medicare. We need to verify your information or your coverage will be canceled. Please give us your Medicare number now.\"",
+    "red_flags": [
+      "Caller says benefits will be canceled right away",
+      "Asks for your Medicare or Social Security number",
+      "Pressure to act quickly"
+    ],
+    "what_to_do": "Hang up and call Medicare directly at 1-800-MEDICARE if you have questions.",
+    "id": "scam_1779094880434_0",
+    "updated_at": "2026-05-18T09:01:20.434Z"
+  },
+  {
+    "title": "Fake Tech Support Pop-Ups on Your Computer",
+    "category": "tech_support",
+    "date_reported": "June 2024",
+    "source": "BBB",
+    "how_it_works": "A pop-up appears on your computer warning of a virus or problem. It tells you to call a number for help. Scammers on the phone may ask for remote access to your computer or payment for fake repairs.",
+    "example_message": "\"Warning! Your computer is infected. Call Microsoft support now at 1-888-XXX-XXXX.\"",
+    "red_flags": [
+      "Pop-up uses scary language and urgent warnings",
+      "Asks you to call a phone number right away",
+      "Requests remote access or payment by gift card"
+    ],
+    "what_to_do": "Close the pop-up and do not call the number; contact a trusted local computer repair shop if you need help.",
+    "id": "scam_1779094880435_1",
+    "updated_at": "2026-05-18T09:01:20.435Z"
+  },
+  {
+    "title": "Social Security Text Message Phishing",
+    "category": "text_scam",
+    "date_reported": "June 2024",
+    "source": "FTC",
+    "how_it_works": "You get a text saying there is a problem with your Social Security account. The message includes a link to click or a number to call. Scammers try to steal your personal information or money.",
+    "example_message": "\"Your Social Security account is suspended. Click here to fix it: [fake link]\"",
+    "red_flags": [
+      "Unsolicited text about Social Security problems",
+      "Includes a link or phone number",
+      "Threatens to suspend your benefits"
+    ],
+    "what_to_do": "Ignore the message and do not click any links; contact Social Security directly using their official website or phone number.",
+    "id": "scam_1779094880435_2",
+    "updated_at": "2026-05-18T09:01:20.435Z"
+  },
+  {
+    "title": "Grandparent Emergency Scam",
+    "category": "grandparent_scam",
+    "date_reported": "June 2024",
+    "source": "AARP",
+    "how_it_works": "Someone calls pretending to be your grandchild or a lawyer for your grandchild. They say there's been an accident or arrest and ask for money right away, often by wire transfer or gift cards.",
+    "example_message": "\"Grandma, I'm in trouble and need money for bail. Please don't tell mom and dad. Send $2,000 right away.\"",
+    "red_flags": [
+      "Caller claims to be a relative in trouble",
+      "Asks for secrecy",
+      "Demands urgent payment by unusual methods"
+    ],
+    "what_to_do": "Hang up and call your grandchild or another family member directly to check the story.",
+    "id": "scam_1779094880435_3",
+    "updated_at": "2026-05-18T09:01:20.435Z"
+  },
+  {
+    "title": "Facebook 'Friend in Need' Messenger Scam",
+    "category": "social_media",
+    "date_reported": "June 2024",
+    "source": "AARP",
+    "how_it_works": "You get a Facebook message from a friend asking for money because of an emergency. In reality, their account was hacked and the scammer is trying to trick you into sending money.",
+    "example_message": "\"Hi, I'm stuck and need money for an emergency. Can you send me $500 through PayPal or gift cards?\"",
+    "red_flags": [
+      "Message comes out of the blue",
+      "Asks for money quickly",
+      "Requests payment by gift card or money transfer"
+    ],
+    "what_to_do": "Call your friend using a phone number you know to check if the request is real.",
+    "id": "scam_1779094880435_4",
+    "updated_at": "2026-05-18T09:01:20.435Z"
+  }
+]
