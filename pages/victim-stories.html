@@ -178,7 +178,6 @@
         <p>Real accounts. Real losses. Documented so others can recognise the patterns.</p>
       </div>
 
-<<<<<<< HEAD
       <!-- FILTER BAR -->
       <div class="filter-bar">
         <div class="filter-bar-inner">
@@ -200,26 +199,6 @@
           </div>
           <div class="filter-select-group">
             <label for="sort-select">Sort by</label>
-=======
-      <!-- TOOLBAR -->
-      <div class="toolbar">
-        <div class="toolbar-inner">
-          <div class="filter-group" id="filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="romance_scam">Romance</button>
-            <button class="filter-btn" data-filter="investment_fraud">Investment</button>
-            <button class="filter-btn" data-filter="crypto_scam">Crypto</button>
-            <button class="filter-btn" data-filter="phishing">Phishing</button>
-            <button class="filter-btn" data-filter="tech_support_scam">Tech support</button>
-            <button class="filter-btn" data-filter="government_impersonation">Government</button>
-            <button class="filter-btn" data-filter="identity_theft">Identity theft</button>
-            <button class="filter-btn" data-filter="online_shopping_fraud">Shopping</button>
-            <button class="filter-btn" data-filter="lottery_scam">Lottery</button>
-            <button class="filter-btn" data-filter="other">Other</button>
-          </div>
-          <div class="sort-group">
-            <label for="sort-select">Sort</label>
->>>>>>> cf949338764075e0aba7cf037bdb8dbcb8efef64
             <select id="sort-select">
               <option value="newest">Newest first</option>
               <option value="oldest">Oldest first</option>
@@ -327,12 +306,8 @@
       const grid = document.getElementById("stories-grid");
       const empty = document.getElementById("empty-state");
       const list = getVisible();
-<<<<<<< HEAD
       const loadingEl = document.getElementById("loading-state");
       if (loadingEl) loadingEl.style.display = "none";
-=======
-      document.getElementById("loading-state").style.display = "none";
->>>>>>> cf949338764075e0aba7cf037bdb8dbcb8efef64
 
       if (list.length === 0) {
         grid.innerHTML = "";
@@ -411,19 +386,9 @@
       document.body.style.overflow = "";
     }
 
-<<<<<<< HEAD
     // ── Filter dropdown ───────────────────────────────
     document.getElementById("category-select").addEventListener("change", e => {
       activeFilter = e.target.value;
-=======
-    // ── Filter buttons ────────────────────────────────
-    document.getElementById("filters").addEventListener("click", e => {
-      const btn = e.target.closest(".filter-btn");
-      if (!btn) return;
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeFilter = btn.dataset.filter;
->>>>>>> cf949338764075e0aba7cf037bdb8dbcb8efef64
       renderGrid();
     });
 

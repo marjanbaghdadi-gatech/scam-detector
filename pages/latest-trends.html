@@ -32,7 +32,6 @@
         <p>Real scam examples collected from trusted sources like the FTC, AARP, and BBB — written in plain language so you know what to watch for.</p>
       </div>
 
-<<<<<<< HEAD
       <!-- FILTER BAR -->
       <div class="filter-bar">
         <div class="filter-bar-inner">
@@ -55,27 +54,6 @@
           </div>
           <div class="filter-select-group">
             <label for="sort-select">Sort by</label>
-=======
-      <!-- TOOLBAR -->
-      <div class="toolbar">
-        <div class="toolbar-inner">
-          <div class="filter-group" id="filters">
-            <button class="filter-btn active" data-category="all">All</button>
-            <button class="filter-btn" data-category="phone_scam">Phone</button>
-            <button class="filter-btn" data-category="text_scam">Text</button>
-            <button class="filter-btn" data-category="email_scam">Email</button>
-            <button class="filter-btn" data-category="social_media">Social media</button>
-            <button class="filter-btn" data-category="romance_scam">Romance</button>
-            <button class="filter-btn" data-category="government_impersonation">Government</button>
-            <button class="filter-btn" data-category="tech_support">Tech support</button>
-            <button class="filter-btn" data-category="grandparent_scam">Grandparent</button>
-            <button class="filter-btn" data-category="investment_fraud">Investment</button>
-            <button class="filter-btn" data-category="crypto_scam">Crypto</button>
-            <button class="filter-btn" data-category="other">Other</button>
-          </div>
-          <div class="sort-group">
-            <label for="sort-select">Sort</label>
->>>>>>> cf949338764075e0aba7cf037bdb8dbcb8efef64
             <select id="sort-select">
               <option value="newest">Newest first</option>
               <option value="oldest">Oldest first</option>
@@ -205,17 +183,8 @@
     }
 
     // ── Filters ───────────────────────────────────────
-<<<<<<< HEAD
     document.getElementById("category-select").addEventListener("change", e => {
       activeCategory = e.target.value;
-=======
-    document.getElementById("filters").addEventListener("click", e => {
-      const btn = e.target.closest(".filter-btn");
-      if (!btn) return;
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeCategory = btn.dataset.category;
->>>>>>> cf949338764075e0aba7cf037bdb8dbcb8efef64
       render();
     });
 
