@@ -67,7 +67,7 @@ Short-Circuit Check
     │
     ├──────────────────────┬──────────────────────┬────────────────────────┐
     ▼                      ▼                      ▼                        ▼
-Layer 1                Layer 2               Layer 3                  Layer 3b
+Layer 1                Layer 2               Layer 3                  Layer 4
 Rules Engine          Behavioral AI         Phone Reputation          Domain Age
 15 signal categories  GPT-4.1 narrative     SkipCalls API             WhoisXML API
 + combo bonuses       + tactics analysis    community reports         registration date
