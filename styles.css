@@ -632,6 +632,72 @@ textarea::placeholder { color: #8a9db5; font-size: var(--text-base); }
   line-height: 1.6;
 }
 
+/* ── ACCURACY CARD ──────────────────────────────────── */
+.accuracy-card {
+  padding: 22px 32px 20px;
+  border-top: 1.5px solid var(--border);
+  background: var(--warm-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.accuracy-label {
+  margin: 0;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.accuracy-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.accuracy-btn {
+  height: 46px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.12s;
+}
+
+.accuracy-true   { background: #e6f7ef; border: 2px solid #a8d8bc; color: var(--teal); }
+.accuracy-true:hover   { background: #cdf0de; border-color: var(--teal); }
+
+.accuracy-false  { background: var(--danger-bg); border: 2px solid var(--danger-border); color: var(--danger); }
+.accuracy-false:hover  { background: #fbd0d0; border-color: var(--danger); }
+
+.accuracy-unsure { background: var(--warm-mist); border: 2px solid var(--border-strong); color: var(--muted); }
+.accuracy-unsure:hover { background: #e4e7ec; border-color: var(--navy); }
+
+.accuracy-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.accuracy-btn.selected { transform: scale(0.96); }
+
+.accuracy-thanks {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--teal);
+  font-weight: 600;
+}
+
+body.dark .accuracy-card { background: var(--warm-mist); border-color: var(--border); }
+body.dark .accuracy-true   { background: rgba(26,107,90,0.15); border-color: #1a5c3a; color: #6ee7b7; }
+body.dark .accuracy-false  { background: rgba(155,28,28,0.15); border-color: #7f2020; color: #fca5a5; }
+body.dark .accuracy-unsure { background: var(--warm-card); border-color: var(--border); color: var(--muted); }
+body.dark .accuracy-true:hover   { background: rgba(26,107,90,0.28); }
+body.dark .accuracy-false:hover  { background: rgba(155,28,28,0.28); }
+body.dark .accuracy-unsure:hover { background: var(--warm-mist); border-color: var(--border-strong); }
+
 /* ── BOTTOM CALLOUT ─────────────────────────────────── */
 .bottom-callout {
   padding: 22px 32px;

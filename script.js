@@ -1,4 +1,6 @@
 const WEBHOOK_URL = "https://mbaghdadi6g.app.n8n.cloud/webhook/fraud-check";
+// Set to your n8n accuracy-feedback webhook URL (should append entries to accuracy_results.json via GitHub API)
+const ACCURACY_WEBHOOK_URL = "https://mbaghdadi6g.app.n8n.cloud/webhook/accuracy-feedback";
  
 const textInput       = document.getElementById("textInput");
 const charCount       = document.getElementById("charCount");
@@ -17,6 +19,9 @@ const lstep1          = document.getElementById("lstep1");
 const lstep2          = document.getElementById("lstep2");
 const lstep3          = document.getElementById("lstep3");
  
+const accuracyCard        = document.getElementById("accuracyCard");
+const accuracyThanks      = document.getElementById("accuracyThanks");
+
 const resultsPanel        = document.getElementById("resultsPanel");
 const riskLabel           = document.getElementById("riskLabel");
 const riskBadge = document.getElementById("riskBadge");
@@ -33,6 +38,8 @@ const disclaimerText      = document.getElementById("disclaimerText");
  
 let selectedImageFile = null;
 let stepTimer = null;
+let lastInputType = "text";
+let lastResultContext = null;
 
 // ── Theme toggle ──────────────────────────────────────
 const themeBtn = document.querySelector(".theme-btn");
@@ -133,7 +140,8 @@ clearImageBtn.addEventListener("click", clearImage);
 analyzeTextBtn.addEventListener("click", async () => {
   const rawText = textInput.value.trim();
   if (!rawText) { alert("Please paste a suspicious message first."); return; }
- 
+
+  lastInputType = "text";
   showLoading("Analyzing your message…");
   setLoading(analyzeTextBtn, true);
  
@@ -157,7 +165,8 @@ analyzeTextBtn.addEventListener("click", async () => {
 analyzeImageBtn.addEventListener("click", async () => {
   if (!selectedImageFile) { alert("Please upload or paste a screenshot first."); return; }
   if (selectedImageFile.size > 10 * 1024 * 1024) { alert("Please upload an image smaller than 10 MB."); return; }
- 
+
+  lastInputType = "image";
   showLoading("Reading your screenshot…");
   setLoading(analyzeImageBtn, true);
  
@@ -186,6 +195,7 @@ viewFullBtn.addEventListener("click", () => {
 // ── Loading panel ─────────────────────────────────────
 function showLoading(headline) {
   loadingHeadline.textContent = headline;
+  accuracyCard.classList.add("hidden");
   resultsPanel.classList.add("hidden");
   loadingPanel.classList.remove("hidden");
   loadingPanel.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -298,10 +308,25 @@ function renderResults(raw) {
   disclaimerText.textContent =
     data.disclaimer || "This is an educational assessment. When in doubt, verify through an official source.";
  
+  // Store context for accuracy vote
+  lastResultContext = {
+    risk_level: level,
+    risk_score: score,
+    input_type: lastInputType,
+  };
+
+  // Reset and show accuracy card
+  accuracyThanks.classList.add("hidden");
+  document.querySelectorAll(".accuracy-btn").forEach(b => {
+    b.disabled = false;
+    b.classList.remove("selected");
+  });
+  accuracyCard.classList.remove("hidden");
+
   resultsPanel.classList.remove("hidden");
   resultsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 }
- 
+
 function renderList(container, items, fallback) {
   container.innerHTML = "";
   (Array.isArray(items) && items.length ? items : [fallback]).forEach(item => {
@@ -311,6 +336,36 @@ function renderList(container, items, fallback) {
   });
 }
  
+// ── Accuracy feedback ─────────────────────────────────
+document.querySelectorAll(".accuracy-btn").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const vote = btn.dataset.vote;
+    document.querySelectorAll(".accuracy-btn").forEach(b => {
+      b.disabled = true;
+      b.classList.remove("selected");
+    });
+    btn.classList.add("selected");
+    accuracyThanks.classList.remove("hidden");
+
+    if (!ACCURACY_WEBHOOK_URL || !lastResultContext) return;
+    try {
+      await fetch(ACCURACY_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          vote,
+          risk_level:  lastResultContext.risk_level,
+          risk_score:  lastResultContext.risk_score,
+          input_type:  lastResultContext.input_type,
+          timestamp:   new Date().toISOString(),
+        }),
+      });
+    } catch (_) {
+      // best-effort — don't surface network errors to the user
+    }
+  });
+});
+
 // ── Error state ───────────────────────────────────────
 function showError(error) {
   riskLabel.textContent    = "—";
@@ -323,10 +378,11 @@ function showError(error) {
   explanationText.textContent     = error.message;
   plainExplanationText.textContent = "";
   disclaimerText.textContent       = "";
+  accuracyCard.classList.add("hidden");
   resultsPanel.classList.remove("hidden");
   resultsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 }
- 
+
 // ── Helpers ───────────────────────────────────────────
 function setLoading(button, isLoading, label) {
   button.disabled = isLoading;
