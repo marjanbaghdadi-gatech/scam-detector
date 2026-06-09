@@ -1,6 +1,5 @@
 const WEBHOOK_URL = "https://mbaghdadi6g.app.n8n.cloud/webhook/fraud-check";
-// Paste your Google Apps Script deployment URL here to save accuracy votes to Google Sheets
-const ACCURACY_WEBHOOK_URL = "https://docs.google.com/spreadsheets/d/1VfUuOumlPuQJvEOHBcE8MqzuBkxjfBbX1k5aqwo0x7c/edit?usp=sharing";
+const ACCURACY_WEBHOOK_URL = "https://mbaghdadi6g.app.n8n.cloud/webhook/accuracy-feedback";
  
 const textInput       = document.getElementById("textInput");
 const charCount       = document.getElementById("charCount");
@@ -347,15 +346,11 @@ document.querySelectorAll(".accuracy-btn").forEach(btn => {
     btn.classList.add("selected");
     accuracyThanks.classList.remove("hidden");
 
-    const validEndpoint = ACCURACY_WEBHOOK_URL && ACCURACY_WEBHOOK_URL.startsWith("https://script.google.com/macros/");
-    if (!validEndpoint || !lastResultContext) return;
+    if (!lastResultContext) return;
     try {
-      // mode: no-cors + text/plain avoids the CORS preflight that Apps Script doesn't support.
-      // e.postData.contents in the script still receives the full JSON string.
       await fetch(ACCURACY_WEBHOOK_URL, {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           timestamp: new Date().toISOString(),
           vote,
