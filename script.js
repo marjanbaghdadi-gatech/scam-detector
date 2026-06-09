@@ -347,7 +347,8 @@ document.querySelectorAll(".accuracy-btn").forEach(btn => {
     btn.classList.add("selected");
     accuracyThanks.classList.remove("hidden");
 
-    if (!ACCURACY_WEBHOOK_URL || ACCURACY_WEBHOOK_URL.includes("YOUR_DEPLOYMENT_ID") || !lastResultContext) return;
+    const validEndpoint = ACCURACY_WEBHOOK_URL && ACCURACY_WEBHOOK_URL.startsWith("https://script.google.com/macros/");
+    if (!validEndpoint || !lastResultContext) return;
     try {
       // mode: no-cors + text/plain avoids the CORS preflight that Apps Script doesn't support.
       // e.postData.contents in the script still receives the full JSON string.
