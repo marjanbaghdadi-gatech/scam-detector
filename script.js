@@ -1,6 +1,6 @@
 const WEBHOOK_URL = "https://mbaghdadi6g.app.n8n.cloud/webhook/fraud-check";
 // Paste your Google Apps Script deployment URL here to save accuracy votes to Google Sheets
-const ACCURACY_WEBHOOK_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+const ACCURACY_WEBHOOK_URL = "https://docs.google.com/spreadsheets/d/19Y5jmy_RdcPmuiKTM_aFE_N1K-qYIIvikCKAbjGkJkw/edit?usp=sharing";
  
 const textInput       = document.getElementById("textInput");
 const charCount       = document.getElementById("charCount");
