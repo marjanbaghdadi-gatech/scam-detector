@@ -357,11 +357,8 @@ document.querySelectorAll(".accuracy-btn").forEach(btn => {
         mode: "no-cors",
         headers: { "Content-Type": "text/plain" },
         body: JSON.stringify({
+          timestamp: new Date().toISOString(),
           vote,
-          risk_level:  lastResultContext.risk_level,
-          risk_score:  lastResultContext.risk_score,
-          input_type:  lastResultContext.input_type,
-          timestamp:   new Date().toISOString(),
         }),
       });
     } catch (_) {
