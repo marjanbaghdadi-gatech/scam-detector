@@ -348,11 +348,9 @@ document.querySelectorAll(".accuracy-btn").forEach(btn => {
 
     if (!lastResultContext) return;
     try {
-      // text/plain + no-cors skips the preflight that n8n blocks cross-origin
       await fetch(ACCURACY_WEBHOOK_URL, {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           timestamp: new Date().toISOString(),
           vote,
