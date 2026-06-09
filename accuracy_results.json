@@ -1,4 +1,9 @@
-{
-  "description": "Accuracy feedback submitted by users of the Fraud Awareness Assistant",
-  "submissions": []
-}
+[
+  {
+    "timestamp": "2026-06-09T17:56:36.445Z",
+    "date": "2026-06-09",
+    "time": "17:56:36",
+    "ip": "98.91.77.46, 104.23.211.131",
+    "user_agent": "Mozilla/5.0 (compatible)"
+  }
+]
