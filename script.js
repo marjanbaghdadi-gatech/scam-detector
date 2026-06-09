@@ -356,8 +356,8 @@ document.querySelectorAll(".accuracy-btn").forEach(btn => {
           vote,
         }),
       });
-    } catch (_) {
-      // best-effort — don't surface network errors to the user
+    } catch (err) {
+      console.error("Accuracy feedback failed:", err);
     }
   });
 });
