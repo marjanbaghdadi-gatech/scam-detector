@@ -1,5 +1,65 @@
 [
   {
+    "id": "yt-UQqgkFuBNgw",
+    "title": "W5: How fraudsters repeatedly con romance scam victims",
+    "source_url": "https://www.youtube.com/watch?v=UQqgkFuBNgw",
+    "thumbnail_url": "https://i.ytimg.com/vi/UQqgkFuBNgw/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAbwHglsnwengEhOg30aiz0MjXptA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "The video explores how romance scammers exploit victims through repeated deception.",
+    "confidence": "high",
+    "date_found": "2026-06-14"
+  },
+  {
+    "id": "yt-QkRfSL3LaZ8",
+    "title": "Criminals using $20 'distraction' tactic to scam victims  | FOX 11 LA",
+    "source_url": "https://www.youtube.com/watch?v=QkRfSL3LaZ8",
+    "thumbnail_url": "https://i.ytimg.com/vi/QkRfSL3LaZ8/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBb8xgvMICpDTaS-PQequ8u7iyzxQ",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "other",
+    "summary": "A woman was scammed using a distraction tactic at a grocery store, leading to significant financial loss.",
+    "confidence": "high",
+    "date_found": "2026-06-14"
+  },
+  {
+    "id": "yt-jt6UDAYrf9I",
+    "title": "Chase bank blames woman for not protecting her account after scammers stole $160,000",
+    "source_url": "https://www.youtube.com/watch?v=jt6UDAYrf9I",
+    "thumbnail_url": "https://i.ytimg.com/vi/jt6UDAYrf9I/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB2_21wuwrgzO6d-Orxf7EFyknhog",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "phishing",
+    "summary": "A business owner was defrauded of $160,000 by scammers posing as bank employees.",
+    "confidence": "high",
+    "date_found": "2026-06-14"
+  },
+  {
+    "id": "yt-l5Xi7UFYnas",
+    "title": "Phishing bank scam dupes Golden couple out of $137K",
+    "source_url": "https://www.youtube.com/watch?v=l5Xi7UFYnas",
+    "thumbnail_url": "https://i.ytimg.com/vi/l5Xi7UFYnas/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCB8Xsm8cgLKoKnjV7RapHlvvl_hQ",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "phishing",
+    "summary": "A Golden couple lost $137K due to a phishing scam disguised as a bank call.",
+    "confidence": "high",
+    "date_found": "2026-06-14"
+  },
+  {
+    "id": "yt-DS1ge8-31IY",
+    "title": "Pig Butchering Scam Exposed!",
+    "source_url": "https://www.youtube.com/watch?v=DS1ge8-31IY",
+    "thumbnail_url": "https://i.ytimg.com/vi/DS1ge8-31IY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBo42jKRKMGpRs7BztKZxsM4McjYA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "other",
+    "summary": "A video exposes the Pig Butchering Scam, highlighting its deceptive tactics.",
+    "confidence": "high",
+    "date_found": "2026-06-14"
+  },
+  {
     "id": "yt-pAKdfVgZDT8",
     "title": "Romance Scam VICTIM Arrested and Interrogated",
     "source_url": "https://www.youtube.com/watch?v=pAKdfVgZDT8",
