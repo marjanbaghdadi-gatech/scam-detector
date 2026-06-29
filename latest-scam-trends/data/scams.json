@@ -4,79 +4,79 @@
     "category": "phone_scam",
     "date_reported": "June 2024",
     "source": "AARP",
-    "how_it_works": "Scammers call pretending to be from Medicare, saying your benefits will be canceled unless you give them personal information or pay a fee. They may use urgent language to scare you into acting quickly.",
-    "example_message": "\"This is Medicare. Your benefits will be canceled if you do not verify your Social Security number and bank account right now.\"",
+    "how_it_works": "Scammers call pretending to be from Medicare and say your benefits will be canceled unless you give them personal information or pay a fee. They may use scare tactics to get you to act quickly.",
+    "example_message": "\"This is Medicare. We need to confirm your Social Security number or your coverage will be canceled immediately.\"",
     "red_flags": [
-      "Caller says your benefits will be canceled immediately",
-      "They ask for your Social Security or bank information",
-      "They pressure you to act right away"
+      "Caller asks for your Social Security or Medicare number",
+      "Threatens to cancel your benefits",
+      "Pressures you to act right away"
     ],
-    "what_to_do": "Hang up and call Medicare directly at 1-800-MEDICARE if you are concerned.",
-    "id": "scam_1782118885409_0",
-    "updated_at": "2026-06-22T09:01:25.409Z"
+    "what_to_do": "Hang up and call Medicare directly at 1-800-MEDICARE if you have questions.",
+    "id": "scam_1782723682567_0",
+    "updated_at": "2026-06-29T09:01:22.567Z"
   },
   {
     "title": "Fake Package Delivery Texts",
     "category": "text_scam",
     "date_reported": "June 2024",
-    "source": "FTC",
-    "how_it_works": "You get a text saying a package couldn’t be delivered and you must click a link to reschedule or pay a fee. The link leads to a fake website that steals your information or installs malware.",
-    "example_message": "\"Your package is waiting for delivery. Please confirm your address and pay $1.99 to reschedule: [fake link]\"",
+    "source": "BBB",
+    "how_it_works": "You get a text saying a package couldn't be delivered and you need to click a link to reschedule or pay a fee. The link leads to a fake website that tries to steal your information or install malware.",
+    "example_message": "\"Your package is waiting for delivery. Please confirm your address and pay the $2.99 fee here: [fake link]\"",
     "red_flags": [
-      "Unexpected text about a delivery you didn’t order",
-      "Links that look strange or don’t match the delivery company",
-      "Requests for payment or personal information"
+      "Unexpected text about a package",
+      "Asks you to click a link",
+      "Requests payment or personal info"
     ],
-    "what_to_do": "Do not click the link—delete the message and contact the delivery company using their official website or phone number.",
-    "id": "scam_1782118885409_1",
-    "updated_at": "2026-06-22T09:01:25.409Z"
+    "what_to_do": "Delete the text and do not click any links.",
+    "id": "scam_1782723682567_1",
+    "updated_at": "2026-06-29T09:01:22.567Z"
   },
   {
     "title": "Social Security Email Phishing",
     "category": "email_scam",
     "date_reported": "June 2024",
-    "source": "BBB",
-    "how_it_works": "You receive an email that looks like it’s from the Social Security Administration, saying there’s a problem with your account. The email asks you to click a link or open an attachment to fix the issue, but it’s a trick to steal your information.",
-    "example_message": "\"We have detected suspicious activity on your Social Security account. Please click here to verify your information.\"",
+    "source": "FTC",
+    "how_it_works": "Scammers send emails that look like they're from the Social Security Administration. They claim there's a problem with your account and ask you to click a link or download an attachment.",
+    "example_message": "\"We noticed suspicious activity on your Social Security account. Please click here to verify your information.\"",
     "red_flags": [
-      "Unexpected email from Social Security",
-      "Spelling or grammar mistakes",
-      "Links or attachments asking for personal details"
+      "Email has urgent warnings",
+      "Asks you to click a link or open an attachment",
+      "Poor grammar or odd sender address"
     ],
-    "what_to_do": "Do not click any links—go to the official Social Security website or call them directly if you have concerns.",
-    "id": "scam_1782118885409_2",
-    "updated_at": "2026-06-22T09:01:25.409Z"
+    "what_to_do": "Do not click links or download attachments. Go to the official Social Security website or call them if you’re concerned.",
+    "id": "scam_1782723682567_2",
+    "updated_at": "2026-06-29T09:01:22.567Z"
   },
   {
-    "title": "Romance Scams on Facebook",
-    "category": "romance_scam",
-    "date_reported": "June 2024",
-    "source": "AARP",
-    "how_it_works": "A scammer pretends to be interested in a romantic relationship on Facebook or other social media. After gaining your trust, they ask for money for an emergency or travel.",
-    "example_message": "\"I care about you so much, but I need help with a sudden medical bill. Can you send me $500?\"",
-    "red_flags": [
-      "Someone you’ve never met asks for money",
-      "Stories about emergencies or needing help",
-      "Refusal to meet in person or video chat"
-    ],
-    "what_to_do": "Never send money to someone you haven’t met in person, no matter how convincing their story is.",
-    "id": "scam_1782118885409_3",
-    "updated_at": "2026-06-22T09:01:25.409Z"
-  },
-  {
-    "title": "Grandparent Emergency Scam",
-    "category": "grandparent_scam",
+    "title": "Facebook 'Friend in Need' Money Request",
+    "category": "social_media",
     "date_reported": "June 2024",
     "source": "news outlet name",
-    "how_it_works": "A caller pretends to be your grandchild or someone calling for them, saying they’re in trouble (like in jail or in an accident) and need money right away. They may beg you not to tell anyone else.",
-    "example_message": "\"Grandma, I’m in trouble! I need you to send money for bail, but please don’t tell Mom or Dad.\"",
+    "how_it_works": "A scammer hacks a friend’s Facebook account and sends messages asking for money because of an emergency. They may say they are stranded or need help with a bill.",
+    "example_message": "\"Hi, I’m stuck out of town and need $500 to get home. Can you send it to me right away?\"",
     "red_flags": [
-      "Caller claims to be a family member in urgent trouble",
-      "They ask for secrecy",
-      "They want you to send money immediately, often by wire or gift card"
+      "Unusual request for money from a friend",
+      "Message is urgent and emotional",
+      "Asks for payment by gift card or wire transfer"
     ],
-    "what_to_do": "Hang up and call your grandchild or another family member directly to check if the story is true.",
-    "id": "scam_1782118885409_4",
-    "updated_at": "2026-06-22T09:01:25.409Z"
+    "what_to_do": "Call your friend directly to check if the request is real before sending any money.",
+    "id": "scam_1782723682567_3",
+    "updated_at": "2026-06-29T09:01:22.567Z"
+  },
+  {
+    "title": "Tech Support Pop-Up Scam",
+    "category": "tech_support",
+    "date_reported": "June 2024",
+    "source": "AARP",
+    "how_it_works": "A pop-up appears on your computer saying you have a virus and must call a phone number for help. The scammer pretends to be from Microsoft or another big company and tries to get you to pay for fake repairs.",
+    "example_message": "\"Warning! Your computer is infected. Call Microsoft support now at 1-800-XXX-XXXX.\"",
+    "red_flags": [
+      "Scary pop-up with urgent warnings",
+      "Tells you to call a phone number",
+      "Asks for payment or remote access to your computer"
+    ],
+    "what_to_do": "Close the pop-up and do not call the number. If you’re worried, contact a trusted local computer repair shop.",
+    "id": "scam_1782723682567_4",
+    "updated_at": "2026-06-29T09:01:22.567Z"
   }
 ]
