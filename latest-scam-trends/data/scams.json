@@ -1,82 +1,82 @@
 [
   {
-    "title": "Medicare Scam Calls Threaten to Cancel Benefits",
+    "title": "Fake Amazon Phone Call Scam",
     "category": "phone_scam",
-    "date_reported": "July 2024",
+    "date_reported": "June 2024",
     "source": "AARP",
-    "how_it_works": "Scammers call pretending to be from Medicare, saying your benefits will be canceled unless you give them personal information or pay a fee. They use threats to scare you into acting quickly.",
-    "example_message": "\"This is Medicare. Your benefits will be suspended unless you confirm your Social Security number right now.\"",
+    "how_it_works": "Scammers call pretending to be from Amazon, saying there is a problem with your account or a suspicious charge. They try to get your personal or bank information or ask you to download software on your computer.",
+    "example_message": "\"This is Amazon Security. We noticed a suspicious charge on your account. Please press 1 to speak to a representative.\"",
     "red_flags": [
-      "Caller asks for your Medicare or Social Security number",
-      "Threats of losing benefits",
-      "Pressure to act immediately"
-    ],
-    "what_to_do": "Hang up and call Medicare directly at 1-800-MEDICARE if you have questions.",
-    "id": "scam_1783328489862_0",
-    "updated_at": "2026-07-06T09:01:29.862Z"
-  },
-  {
-    "title": "Fake Package Delivery Texts",
-    "category": "text_scam",
-    "date_reported": "July 2024",
-    "source": "FTC",
-    "how_it_works": "You get a text saying there’s a problem with a package delivery and you need to click a link to fix it. The link leads to a fake website that steals your information or installs malware.",
-    "example_message": "\"Your package is waiting for delivery. Please update your address here: [fake link]\"",
-    "red_flags": [
-      "Unexpected text about a delivery",
-      "Links to unfamiliar websites",
+      "Unsolicited call about your account",
+      "Pressure to act quickly",
       "Requests for personal or payment information"
     ],
-    "what_to_do": "Do not click the link—delete the message and check with the delivery company using their official website or phone number.",
-    "id": "scam_1783328489862_1",
-    "updated_at": "2026-07-06T09:01:29.862Z"
+    "what_to_do": "Hang up and call Amazon directly using the number on their website.",
+    "id": "scam_1783933266182_0",
+    "updated_at": "2026-07-13T09:01:06.182Z"
   },
   {
-    "title": "Social Security Email Phishing",
-    "category": "email_scam",
-    "date_reported": "July 2024",
-    "source": "SSA.gov (news outlet)",
-    "how_it_works": "Scammers send emails pretending to be from Social Security, saying there’s a problem with your account. They ask you to click a link or call a number to fix it, but it’s really a trick to steal your information.",
-    "example_message": "\"We noticed suspicious activity on your Social Security account. Please verify your information by clicking this link.\"",
-    "red_flags": [
-      "Email says there’s a problem with your account",
-      "Asks you to click a link or call a number",
-      "Spelling or grammar mistakes"
-    ],
-    "what_to_do": "Do not click any links—go to the official Social Security website or call their real number to check your account.",
-    "id": "scam_1783328489862_2",
-    "updated_at": "2026-07-06T09:01:29.862Z"
-  },
-  {
-    "title": "Facebook 'Friend in Need' Money Request",
-    "category": "social_media",
-    "date_reported": "July 2024",
-    "source": "BBB",
-    "how_it_works": "A scammer hacks a friend’s Facebook account and sends you a message saying they’re in trouble and need money. They ask you to send money quickly, often by gift card or wire transfer.",
-    "example_message": "\"Hi, I’m stuck and need your help. Can you send me a $200 gift card right away?\"",
-    "red_flags": [
-      "Urgent request for money from a friend",
-      "Asked to send gift cards or wire money",
-      "Message seems out of character for your friend"
-    ],
-    "what_to_do": "Call your friend directly using a number you know to check if the request is real.",
-    "id": "scam_1783328489862_3",
-    "updated_at": "2026-07-06T09:01:29.862Z"
-  },
-  {
-    "title": "Fake Tech Support Pop-Ups",
-    "category": "tech_support",
-    "date_reported": "July 2024",
+    "title": "Medicare Card Renewal Text Scam",
+    "category": "text_scam",
+    "date_reported": "June 2024",
     "source": "FTC",
-    "how_it_works": "A pop-up appears on your computer saying you have a virus and must call a number for help. The scammer on the phone asks for remote access to your computer or payment for fake repairs.",
-    "example_message": "\"Warning! Your computer is infected. Call Microsoft Support now: 1-800-XXX-XXXX\"",
+    "how_it_works": "You get a text saying your Medicare card needs to be renewed or updated. The message includes a link that leads to a fake website asking for your Medicare number and other personal details.",
+    "example_message": "\"Your Medicare card is expiring soon. Click here to update your information: [fake link]\"",
     "red_flags": [
-      "Pop-up says you have a virus",
-      "Asked to call a phone number",
-      "Asked to give remote access or pay for repairs"
+      "Unexpected text about Medicare",
+      "Link to a website",
+      "Requests for your Medicare number"
     ],
-    "what_to_do": "Close the pop-up and do not call the number—if you’re worried, contact a trusted local computer repair shop.",
-    "id": "scam_1783328489862_4",
-    "updated_at": "2026-07-06T09:01:29.862Z"
+    "what_to_do": "Do not click the link or reply; contact Medicare using the number on your card if you have questions.",
+    "id": "scam_1783933266182_1",
+    "updated_at": "2026-07-13T09:01:06.182Z"
+  },
+  {
+    "title": "Facebook Grandchild Emergency Scam",
+    "category": "social_media",
+    "date_reported": "June 2024",
+    "source": "BBB",
+    "how_it_works": "Scammers hack or create fake Facebook accounts pretending to be your grandchild. They message you saying they are in trouble and need money right away, often for bail or a medical emergency.",
+    "example_message": "\"Grandma, I’m in trouble and need money for bail. Please don’t tell mom and dad. Can you send $1,000 right away?\"",
+    "red_flags": [
+      "Urgent request for money",
+      "Asked to keep it a secret",
+      "Unusual payment methods like gift cards or wire transfer"
+    ],
+    "what_to_do": "Call your grandchild or another family member directly to check before sending any money.",
+    "id": "scam_1783933266182_2",
+    "updated_at": "2026-07-13T09:01:06.182Z"
+  },
+  {
+    "title": "Fake Tech Support Pop-Up",
+    "category": "tech_support",
+    "date_reported": "June 2024",
+    "source": "FTC",
+    "how_it_works": "A pop-up appears on your computer saying you have a virus and must call a number for help. The scammer tries to get you to pay for fake repairs or gives them access to your computer.",
+    "example_message": "\"Warning! Your computer is infected. Call Microsoft Support now at 1-800-XXX-XXXX.\"",
+    "red_flags": [
+      "Scary pop-up warning",
+      "Phone number to call for help",
+      "Asked to give remote access to your computer"
+    ],
+    "what_to_do": "Close the pop-up and do not call the number; use your own trusted tech support if you need help.",
+    "id": "scam_1783933266182_3",
+    "updated_at": "2026-07-13T09:01:06.182Z"
+  },
+  {
+    "title": "IRS Tax Refund Email Phishing",
+    "category": "email_scam",
+    "date_reported": "June 2024",
+    "source": "news outlet name",
+    "how_it_works": "You receive an email claiming to be from the IRS about a tax refund. The email asks you to click a link and enter personal information, but it is a trick to steal your identity.",
+    "example_message": "\"You are eligible for a tax refund. Click here to claim your refund now.\"",
+    "red_flags": [
+      "Email claims to be from the IRS",
+      "Links to a website",
+      "Requests for personal or bank information"
+    ],
+    "what_to_do": "Do not click any links or give information; the IRS will never email you about refunds.",
+    "id": "scam_1783933266182_4",
+    "updated_at": "2026-07-13T09:01:06.182Z"
   }
 ]
