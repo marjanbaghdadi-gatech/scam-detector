@@ -1,5 +1,17 @@
 [
   {
+    "id": "yt-xPY_AIc9cWc",
+    "title": "Romance Scam Victim Lost $1.6 Million Dollars in Crypto Scam | Lang’s Interview",
+    "source_url": "https://www.youtube.com/watch?v=xPY_AIc9cWc",
+    "thumbnail_url": "https://i.ytimg.com/vi/xPY_AIc9cWc/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBYgZl3BZFTC1-d5Ocm1wRA4VG02Q",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "A victim lost $1.6 million in a romance scam involving cryptocurrency.",
+    "confidence": "high",
+    "date_found": "2026-08-02"
+  },
+  {
     "id": "yt-_6ISzGe4Bug",
     "title": "He Scammed Her, So She Decided To Get Even | A Perfect Scam",
     "source_url": "https://www.youtube.com/watch?v=_6ISzGe4Bug",
@@ -1184,18 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "crypto_scam",
     "summary": "A woman lost her entire inheritance and her father's life savings after falling for a fraudulent crypto investment scheme.",
-    "confidence": "high",
-    "date_found": "2026-05-20"
-  },
-  {
-    "id": "yt-lB-l2pfJJbo",
-    "title": "76-year-old retired man left homeless after getting scammed out of $800k | FOX 13 Seattle",
-    "source_url": "https://www.youtube.com/watch?v=lB-l2pfJJbo",
-    "thumbnail_url": "https://i.ytimg.com/vi/lB-l2pfJJbo/hq720.jpg?sqp=-oaymwEnCOgCEMoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLATvCBFzDzBMuHdZXUNnbuXuzB3EA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "other",
-    "summary": "A retired man lost $800,000 to a scam and became homeless.",
     "confidence": "high",
     "date_found": "2026-05-20"
   }
