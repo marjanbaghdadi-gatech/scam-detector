@@ -1,82 +1,82 @@
 [
   {
-    "title": "Medicare Card Scam Calls",
+    "title": "Medicare Scam Calls Threaten to Cancel Coverage",
     "category": "phone_scam",
     "date_reported": "June 2024",
     "source": "AARP",
-    "how_it_works": "Scammers call pretending to be from Medicare, saying you need a new card or your benefits will stop. They ask for your Medicare number or other personal information.",
-    "example_message": "\"This is Medicare calling. We need to send you a new card. Please confirm your Medicare number and address.\"",
+    "how_it_works": "Scammers call pretending to be from Medicare. They say your coverage will be canceled unless you give them personal information or pay a fee. They may use official-sounding language to scare you.",
+    "example_message": "\"This is Medicare. Your coverage will be canceled unless you confirm your Social Security number and pay a small fee today.\"",
     "red_flags": [
-      "Unsolicited call about your Medicare card",
-      "Asked to give your Medicare or Social Security number",
-      "Threatens to stop your benefits if you don't respond"
+      "Caller asks for your Medicare or Social Security number",
+      "Threatens to cancel your coverage",
+      "Asks for payment over the phone"
     ],
-    "what_to_do": "Hang up and call Medicare directly at 1-800-MEDICARE if you have questions.",
-    "id": "scam_1785142869135_0",
-    "updated_at": "2026-07-27T09:01:09.135Z"
+    "what_to_do": "Hang up and call Medicare directly at 1-800-MEDICARE if you are worried.",
+    "id": "scam_1785747663283_0",
+    "updated_at": "2026-08-03T09:01:03.283Z"
   },
   {
-    "title": "Fake Package Delivery Texts",
-    "category": "text_scam",
-    "date_reported": "June 2024",
-    "source": "BBB",
-    "how_it_works": "You get a text saying a package couldn't be delivered and you need to click a link to reschedule or pay a fee. The link leads to a fake website that tries to steal your information or money.",
-    "example_message": "\"Your package is waiting for delivery. Please click here to reschedule: [fake link]\"",
-    "red_flags": [
-      "Unexpected text about a delivery",
-      "Link to a website you don't recognize",
-      "Requests for payment or personal details"
-    ],
-    "what_to_do": "Do not click the link. Delete the text and contact the delivery company using their official website or phone number.",
-    "id": "scam_1785142869135_1",
-    "updated_at": "2026-07-27T09:01:09.135Z"
-  },
-  {
-    "title": "Social Security Email Phishing",
-    "category": "email_scam",
+    "title": "Fake Tech Support Pop-Ups on Your Computer",
+    "category": "tech_support",
     "date_reported": "June 2024",
     "source": "FTC",
-    "how_it_works": "Scammers send emails pretending to be from Social Security, claiming there's a problem with your account. They ask you to click a link or call a number to fix it, but it's a trick to steal your information.",
-    "example_message": "\"We have detected suspicious activity on your Social Security account. Click here to verify your information.\"",
+    "how_it_works": "A pop-up appears on your computer saying you have a virus. It tells you to call a number for help. If you call, the scammer may ask to access your computer or demand money to 'fix' the problem.",
+    "example_message": "\"Warning! Your computer is infected. Call Microsoft Support now at 1-888-XXX-XXXX.\"",
     "red_flags": [
-      "Email says there's a problem with your Social Security",
-      "Asks you to click a link or download an attachment",
-      "Uses urgent or threatening language"
+      "Pop-up says you have a virus and gives a phone number",
+      "Person asks to control your computer",
+      "Asked to pay with gift cards or wire transfer"
     ],
-    "what_to_do": "Do not click any links or give out information. Go to the official Social Security website or call them directly.",
-    "id": "scam_1785142869135_2",
-    "updated_at": "2026-07-27T09:01:09.135Z"
-  },
-  {
-    "title": "Facebook Marketplace Rental Scam",
-    "category": "social_media",
-    "date_reported": "June 2024",
-    "source": "news outlet name",
-    "how_it_works": "Scammers post fake rental listings on Facebook Marketplace. They ask for a deposit or rent up front, but there is no real property to rent.",
-    "example_message": "\"This beautiful apartment is available now! Send a deposit to hold it and I'll mail you the keys.\"",
-    "red_flags": [
-      "Deal seems too good to be true",
-      "Asked to send money before seeing the place",
-      "Landlord refuses to meet in person"
-    ],
-    "what_to_do": "Never send money for a rental you haven't seen in person and always meet the landlord before paying.",
-    "id": "scam_1785142869135_3",
-    "updated_at": "2026-07-27T09:01:09.135Z"
+    "what_to_do": "Close the pop-up and do not call the number or give anyone access to your computer.",
+    "id": "scam_1785747663283_1",
+    "updated_at": "2026-08-03T09:01:03.283Z"
   },
   {
     "title": "Grandparent Emergency Scam",
     "category": "grandparent_scam",
     "date_reported": "June 2024",
-    "source": "AARP",
-    "how_it_works": "Someone calls pretending to be your grandchild or a lawyer, saying your grandchild is in trouble and needs money right away. They ask you to send cash or gift cards.",
-    "example_message": "\"Grandma, I’m in jail and need money for bail. Please don’t tell mom and dad. Can you send $2,000 right away?\"",
+    "source": "BBB",
+    "how_it_works": "Someone calls pretending to be your grandchild or a lawyer. They say your grandchild is in trouble and needs money right away. They may beg you not to tell anyone.",
+    "example_message": "\"Grandma, I’m in jail and need bail money. Please send $2,000 right away and don’t tell Mom or Dad.\"",
     "red_flags": [
-      "Caller wants you to keep it a secret",
-      "Asks for money urgently",
-      "Requests payment by wire transfer or gift cards"
+      "Caller says it's an emergency and asks for secrecy",
+      "Wants money sent fast (gift cards, wire transfer)",
+      "Voice may sound odd or connection is bad"
     ],
     "what_to_do": "Hang up and call your grandchild or another family member to check if the story is true.",
-    "id": "scam_1785142869135_4",
-    "updated_at": "2026-07-27T09:01:09.135Z"
+    "id": "scam_1785747663283_2",
+    "updated_at": "2026-08-03T09:01:03.283Z"
+  },
+  {
+    "title": "Social Security Suspension Scam",
+    "category": "government_impersonation",
+    "date_reported": "June 2024",
+    "source": "FTC",
+    "how_it_works": "You get a call or email saying your Social Security number is suspended due to suspicious activity. The scammer says you must confirm your number or pay to fix the problem.",
+    "example_message": "\"This is the Social Security office. Your number has been suspended. Press 1 to speak to an agent.\"",
+    "red_flags": [
+      "Threatens to suspend your Social Security number",
+      "Asks for your Social Security number or payment",
+      "Uses urgent language"
+    ],
+    "what_to_do": "Do not respond. The real Social Security office will never call and threaten you or ask for payment.",
+    "id": "scam_1785747663283_3",
+    "updated_at": "2026-08-03T09:01:03.283Z"
+  },
+  {
+    "title": "Package Delivery Text Message Scam",
+    "category": "text_scam",
+    "date_reported": "June 2024",
+    "source": "news outlet name",
+    "how_it_works": "You get a text saying there is a problem with a package delivery. The message asks you to click a link to fix the issue or pay a fee. The link may steal your information or install malware.",
+    "example_message": "\"Your package is waiting for delivery. Please click here to update your address: [fake link]\"",
+    "red_flags": [
+      "Unexpected text about a package",
+      "Link asks for personal or payment information",
+      "Spelling or grammar mistakes"
+    ],
+    "what_to_do": "Do not click the link. Delete the message and contact the delivery company using their official website if you are expecting a package.",
+    "id": "scam_1785747663283_4",
+    "updated_at": "2026-08-03T09:01:03.283Z"
   }
 ]
