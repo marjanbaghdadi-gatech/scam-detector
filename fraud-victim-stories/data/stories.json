@@ -1,5 +1,29 @@
 [
   {
+    "id": "yt-rloYvbcIY5E",
+    "title": "She Sent Him Money for 7 Years… And Still Believed Him",
+    "source_url": "https://www.youtube.com/watch?v=rloYvbcIY5E",
+    "thumbnail_url": "https://i.ytimg.com/vi/rloYvbcIY5E/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBFLcV_c8xwim2jXSJA77esuSpTxA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "A woman sent money to a man over seven years while believing in his deceit.",
+    "confidence": "high",
+    "date_found": "2026-08-09"
+  },
+  {
+    "id": "yt-ggM3yzTubMk",
+    "title": "Dating Scammers Exposed: The Victims They Target Most",
+    "source_url": "https://www.youtube.com/watch?v=ggM3yzTubMk",
+    "thumbnail_url": "https://i.ytimg.com/vi/ggM3yzTubMk/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA3gmKewdANdmmoXdk28IHnYq76Lw",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "The video discusses how dating scammers target victims and manipulate their emotions.",
+    "confidence": "high",
+    "date_found": "2026-08-09"
+  },
+  {
     "id": "yt-yB8QL8WQgFg",
     "title": "How Scammers Con People out of Their Savings | Romance Scams | ENDEVR Documentary",
     "source_url": "https://www.youtube.com/watch?v=yB8QL8WQgFg",
@@ -1172,30 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "romance_scam",
     "summary": "A retiree reveals her experience of being manipulated in a romance scam that resulted in a loss of $2.5 million.",
-    "confidence": "high",
-    "date_found": "2026-05-27"
-  },
-  {
-    "id": "yt-ntrGrfvvkII",
-    "title": "Scam Victim Story: Why do People Fall for SCAMS Anyway?",
-    "source_url": "https://www.youtube.com/watch?v=ntrGrfvvkII",
-    "thumbnail_url": "https://i.ytimg.com/vi/ntrGrfvvkII/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLD6tS_ADw5p9auCux86PPaOhSmXsA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "phishing",
-    "summary": "The story recounts how an intelligent young adult fell victim to a phishing scam.",
-    "confidence": "high",
-    "date_found": "2026-05-27"
-  },
-  {
-    "id": "yt-D54aI7skixY",
-    "title": "Anything for Love: Inside the Romance Scam Epidemic | CBS Reports",
-    "source_url": "https://www.youtube.com/watch?v=D54aI7skixY",
-    "thumbnail_url": "https://i.ytimg.com/vi/D54aI7skixY/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLD0gWUDizeSmK9PpZTZ4vHuca6CdA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "The video explores the tactics of romance scammers who exploit individuals seeking love.",
     "confidence": "high",
     "date_found": "2026-05-27"
   }
