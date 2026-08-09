@@ -1,5 +1,41 @@
 [
   {
+    "id": "yt-hY6gfmJAG-Y",
+    "title": "A Victim's Story: How investment scammers tricked me out of £210,000",
+    "source_url": "https://www.youtube.com/watch?v=hY6gfmJAG-Y",
+    "thumbnail_url": "https://i.ytimg.com/vi/hY6gfmJAG-Y/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAWiA57iwHldtVxCwdCbE5Xqqazxg",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "investment_fraud",
+    "summary": "A victim lost £210,000 to investment scammers.",
+    "confidence": "high",
+    "date_found": "2026-08-09"
+  },
+  {
+    "id": "yt-CjGFIA7E2BA",
+    "title": "Have you ever been Scammed?",
+    "source_url": "https://www.youtube.com/watch?v=CjGFIA7E2BA",
+    "thumbnail_url": "https://i.ytimg.com/vi/CjGFIA7E2BA/hq720.jpg?sqp=-oaymwE2COgCEMoBSFXyq4qpAygIARUAAIhCGABwAcABBvABAfgBtgiAAoAPigIMCAAQARhQIFwoZTAP&rs=AOn4CLAyYk4-NicqznU6XtwZR3NBozNFoQ",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "crypto_scam",
+    "summary": "The video discusses experiences with Coinbase-related scams.",
+    "confidence": "high",
+    "date_found": "2026-08-09"
+  },
+  {
+    "id": "yt-9TA3RqAESVo",
+    "title": "How human trafficking victims are forced to run ‘pig butchering’ investment scams",
+    "source_url": "https://www.youtube.com/watch?v=9TA3RqAESVo",
+    "thumbnail_url": "https://i.ytimg.com/vi/9TA3RqAESVo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBlFjgFcEXfCxk3az8NC8Jeh78U0A",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "investment_fraud",
+    "summary": "Human trafficking victims are forced into schemes that defraud individuals through investment scams.",
+    "confidence": "high",
+    "date_found": "2026-08-09"
+  },
+  {
     "id": "yt-rloYvbcIY5E",
     "title": "She Sent Him Money for 7 Years… And Still Believed Him",
     "source_url": "https://www.youtube.com/watch?v=rloYvbcIY5E",
@@ -1160,42 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "romance_scam",
     "summary": "Romance scammers exploit individuals seeking love, leading to significant financial losses.",
-    "confidence": "high",
-    "date_found": "2026-05-27"
-  },
-  {
-    "id": "yt-vthPmLORVrM",
-    "title": "Victim of Romance Scam Who Became Money Mule Tells Story",
-    "source_url": "https://www.youtube.com/watch?v=vthPmLORVrM",
-    "thumbnail_url": "https://i.ytimg.com/vi/vthPmLORVrM/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBskU79uMSEs_lh7FWh1A10Z7cPXA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "Glenda, an 81-year-old victim, shares her experience of being caught in a romance scam and becoming a money mule.",
-    "confidence": "high",
-    "date_found": "2026-05-27"
-  },
-  {
-    "id": "yt-ltI7DXrNQCA",
-    "title": "Elderly couple loses nearly $700K online scam",
-    "source_url": "https://www.youtube.com/watch?v=ltI7DXrNQCA",
-    "thumbnail_url": "https://i.ytimg.com/vi/ltI7DXrNQCA/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBbV5OcpPk7U9nYSYcSt8r9B2l43g",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "online_shopping_fraud",
-    "summary": "An elderly couple lost their life savings due to a scam involving a fake Amazon purchase.",
-    "confidence": "high",
-    "date_found": "2026-05-27"
-  },
-  {
-    "id": "yt-PtjL555xWqg",
-    "title": "Romance scam victim speaks out on \"psychological manipulation\" that cost her $2.5 million",
-    "source_url": "https://www.youtube.com/watch?v=PtjL555xWqg",
-    "thumbnail_url": "https://i.ytimg.com/vi/PtjL555xWqg/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBJ0PP-h3R0xgDNZV52qXLLKj9qRA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "A retiree reveals her experience of being manipulated in a romance scam that resulted in a loss of $2.5 million.",
     "confidence": "high",
     "date_found": "2026-05-27"
   }
