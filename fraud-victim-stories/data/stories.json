@@ -1,5 +1,29 @@
 [
   {
+    "id": "yt-yB8QL8WQgFg",
+    "title": "How Scammers Con People out of Their Savings | Romance Scams | ENDEVR Documentary",
+    "source_url": "https://www.youtube.com/watch?v=yB8QL8WQgFg",
+    "thumbnail_url": "https://i.ytimg.com/vi/yB8QL8WQgFg/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCmbQJVDOGkxsONG8Vy4DdNbjChpw",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "The documentary explores how individuals are deceived in romance scams, leading to financial loss.",
+    "confidence": "high",
+    "date_found": "2026-08-09"
+  },
+  {
+    "id": "yt-GQbNnUW_xqw",
+    "title": "How con-artist Anna Sorokin ripped off the New York elite and became a star  | 60 Minutes Australia",
+    "source_url": "https://www.youtube.com/watch?v=GQbNnUW_xqw",
+    "thumbnail_url": "https://i.ytimg.com/vi/GQbNnUW_xqw/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD8CoZXleJ3FdjiIgXAOQVdbLnaiA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "other",
+    "summary": "Anna Sorokin deceived New York's elite, posing as a wealthy socialite.",
+    "confidence": "high",
+    "date_found": "2026-08-09"
+  },
+  {
     "id": "yt-hwG3Zhj9Dto",
     "title": "Jupiter man says investment scam stole his life savings, forcing him to start over at 67",
     "source_url": "https://www.youtube.com/watch?v=hwG3Zhj9Dto",
@@ -1174,29 +1198,5 @@
     "summary": "The video explores the tactics of romance scammers who exploit individuals seeking love.",
     "confidence": "high",
     "date_found": "2026-05-27"
-  },
-  {
-    "id": "yt-STYNYRvWkks",
-    "title": "76-year-old loses $1.6 million savings to AI investment scam",
-    "source_url": "https://www.youtube.com/watch?v=STYNYRvWkks",
-    "thumbnail_url": "https://i.ytimg.com/vi/STYNYRvWkks/hq720.jpg?sqp=-oaymwEnCOgCEMoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCXLaxvOO-AtZT1hesq5iMkzL1X6A",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "investment_fraud",
-    "summary": "A 76-year-old man lost $1.6 million to an AI investment scam initiated by a text message.",
-    "confidence": "high",
-    "date_found": "2026-05-20"
-  },
-  {
-    "id": "yt-LCXoGsvXJ6M",
-    "title": "Crypto scam: North Carolina man loses more than $750,000 of savings in crypto investment scheme",
-    "source_url": "https://www.youtube.com/watch?v=LCXoGsvXJ6M",
-    "thumbnail_url": "https://i.ytimg.com/vi/LCXoGsvXJ6M/hq720.jpg?sqp=-oaymwFBCOgCEMoBSFryq4qpAzMIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB8AEB-AH-CYAC0AWKAgwIABABGGUgTShAMA8=&rs=AOn4CLCBDKlJohSD13EboRQtau1JGl-QOA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "crypto_scam",
-    "summary": "A North Carolina man lost over $750,000 in a crypto investment scheme.",
-    "confidence": "high",
-    "date_found": "2026-05-20"
   }
 ]
