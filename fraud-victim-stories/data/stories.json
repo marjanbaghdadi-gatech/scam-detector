@@ -1,5 +1,53 @@
 [
   {
+    "id": "yt-dgZaxsLjdQE",
+    "title": "Woman sounds alarm on sophisticated wire transfer fraud l GMA",
+    "source_url": "https://www.youtube.com/watch?v=dgZaxsLjdQE",
+    "thumbnail_url": "https://i.ytimg.com/vi/dgZaxsLjdQE/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDByx7SE6CPoOxQrhuTG9VcBTCzgQ",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "phishing",
+    "summary": "A woman lost over $11,000 after scammers posed as her bank through calls and texts.",
+    "confidence": "high",
+    "date_found": "2026-08-16"
+  },
+  {
+    "id": "yt-V-RC0zIdi04",
+    "title": "Older, Lonely And Scammed | EP424 | The Dr. Phil Podcast",
+    "source_url": "https://www.youtube.com/watch?v=V-RC0zIdi04",
+    "thumbnail_url": "https://i.ytimg.com/vi/V-RC0zIdi04/hq720.jpg?sqp=-oaymwE2COgCEMoBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARh_IEIoIzAP&rs=AOn4CLAnNW8JDwHCqSjeHYE8PLnkZrTeAA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "The podcast discusses scams targeting older, lonely Americans, featuring a victim's harrowing story.",
+    "confidence": "high",
+    "date_found": "2026-08-16"
+  },
+  {
+    "id": "yt-ACijyfS3ya4",
+    "title": "Exposing a Romance Scammer",
+    "source_url": "https://www.youtube.com/watch?v=ACijyfS3ya4",
+    "thumbnail_url": "https://i.ytimg.com/vi/ACijyfS3ya4/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBANeoJywVA4Ufd7HqtQ78rKaws-Q",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "A woman was scammed after her mother fell in love with a Hallmark actor.",
+    "confidence": "high",
+    "date_found": "2026-08-16"
+  },
+  {
+    "id": "yt-6Vw25qntLW0",
+    "title": "Victim of complex bank account scam shares her story to protect others",
+    "source_url": "https://www.youtube.com/watch?v=6Vw25qntLW0",
+    "thumbnail_url": "https://i.ytimg.com/vi/6Vw25qntLW0/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAkoJ_W4KIn7Fl7VfiN5Hm6tKYoyA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "other",
+    "summary": "A victim shares her experience with a complex bank account scam to warn others.",
+    "confidence": "high",
+    "date_found": "2026-08-16"
+  },
+  {
     "id": "yt-vthPmLORVrM",
     "title": "Victim of Romance Scam Who Became Money Mule Tells Story",
     "source_url": "https://www.youtube.com/watch?v=vthPmLORVrM",
@@ -1150,53 +1198,5 @@
     "summary": "A conman exploits victims in a scam similar to the Tinder Swindler.",
     "confidence": "high",
     "date_found": "2026-05-31"
-  },
-  {
-    "id": "yt-BHJfWKMVmxc",
-    "title": "The Faking Dead. Ryan Roth. Global con man and scammer. True crime documentary.",
-    "source_url": "https://www.youtube.com/watch?v=BHJfWKMVmxc",
-    "thumbnail_url": "https://i.ytimg.com/vi/BHJfWKMVmxc/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAtsnx-w0jmsWPBA_7uXubTO9H19g",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "other",
-    "summary": "A documentary about Ryan Roth, a global con man and scammer.",
-    "confidence": "high",
-    "date_found": "2026-05-31"
-  },
-  {
-    "id": "yt-_6hKErybcBo",
-    "title": "Romance scam victim lost $500,000, shares story for first time",
-    "source_url": "https://www.youtube.com/watch?v=_6hKErybcBo",
-    "thumbnail_url": "https://i.ytimg.com/vi/_6hKErybcBo/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLC1gZAAtywdbqx-mNHnI-NW2ic-Lg",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "Julie Ericksen lost $500,000 in a romance scam.",
-    "confidence": "high",
-    "date_found": "2026-05-27"
-  },
-  {
-    "id": "yt-DIUly35vW7s",
-    "title": "Romance Scam Survivor Now Helps Others",
-    "source_url": "https://www.youtube.com/watch?v=DIUly35vW7s",
-    "thumbnail_url": "https://i.ytimg.com/vi/DIUly35vW7s/hq720.jpg?sqp=-oaymwE9COgCEMoBSFryq4qpAy8IARUAAAAAGAAlAADIQj0AgKJDeAHwAQH4AbYIgAKAD4oCDAgAEAEYZSBRKD4wDw==&rs=AOn4CLAZcmglvaYhUDy4VItuf3o9AgWJkw",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "A romance scam survivor shares her experience and advocates for others.",
-    "confidence": "high",
-    "date_found": "2026-05-27"
-  },
-  {
-    "id": "yt-2X27uA0mSK8",
-    "title": "Local woman falls victim to lottery scam",
-    "source_url": "https://www.youtube.com/watch?v=2X27uA0mSK8",
-    "thumbnail_url": "https://i.ytimg.com/vi/2X27uA0mSK8/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLA6LSOGHtrWLKpbyhhdXWlAImUQeQ",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "lottery_scam",
-    "summary": "A local woman emotionally recounts her experience of falling victim to a lottery scam.",
-    "confidence": "high",
-    "date_found": "2026-05-27"
   }
 ]
