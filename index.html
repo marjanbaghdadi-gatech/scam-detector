@@ -176,7 +176,7 @@
   function goToPostSurvey() {
     const params = new URLSearchParams(window.location.search);
     const pid = params.get("pid");
-    const postSurveyBase = "https://gatech.co1.qualtrics.com/jfe/form/SV_1YRlFkYcZXiWoS2";
+    const postSurveyBase = "https://gatech.co1.qualtrics.com/jfe/form/SV_3IAFPdJyDc0C4TQ";
     window.location.href = pid
       ? `${postSurveyBase}?pid=${encodeURIComponent(pid)}`
       : postSurveyBase;
