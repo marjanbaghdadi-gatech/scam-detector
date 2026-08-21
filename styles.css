@@ -132,7 +132,7 @@ body {
 
 /* ── MAIN FRAME ─────────────────────────────────────── */
 .main-frame {
-  background: var(--warm-card);
+  background: transparent;
   /* border: 1.5px solid var(--border); */
   border-radius: var(--r-xl);
   /* box-shadow: var(--shadow-lg); */
@@ -1001,7 +1001,7 @@ body.dark .clear-image-btn { background: var(--warm-card); color: #fca5a5; borde
     min-height: clamp(100px, 20vh, 220px);
   }
   body.tool-page .page-hero h1 { font-size: clamp(26px, 5.2vh, 68px); margin-bottom: clamp(6px, 1.2vh, 14px); }
-  body.tool-page .page-hero p  { font-size: clamp(14px, 2vh, 20px); }
+  body.tool-page .page-hero p  { font-size: clamp(14px, 2vh, 20px); max-width: none; }
   body.tool-page .page-hero .updated-badge { margin-bottom: clamp(8px, 1.5vh, 18px); padding: clamp(4px, 0.8vh, 6px) 18px; }
 
   body.tool-page .content-area {
@@ -1036,7 +1036,7 @@ body.dark .clear-image-btn { background: var(--warm-card); color: #fca5a5; borde
   body.tool-page .input-footer { padding-top: clamp(8px, 1.6vh, 20px); }
   body.tool-page .primary-btn { height: clamp(40px, 6.5vh, 58px); font-size: clamp(15px, 2vh, 26px); padding: 0 clamp(16px, 2vw, 30px); }
 
-  body.tool-page .feedback-bar { padding: clamp(10px, 1.8vh, 32px) 28px clamp(14px, 2.4vh, 56px); flex: 0 0 auto; }
+  body.tool-page .feedback-bar { padding: clamp(12px, 2vh, 32px) 28px; flex: 0 0 auto; }
   body.tool-page .feedback-btn { height: clamp(40px, 6vh, 62px); font-size: clamp(15px, 1.8vh, 42px); padding: 0 clamp(18px, 2.4vw, 36px); }
 
   body.tool-page .tool-footer {
@@ -1052,7 +1052,8 @@ body.dark .clear-image-btn { background: var(--warm-card); color: #fca5a5; borde
 .feedback-bar {
   display: flex;
   justify-content: center;
-  padding: 32px 28px 56px;
+  align-items: center;
+  padding: 32px 28px;
 }
 
 .feedback-btn {
