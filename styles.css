@@ -953,6 +953,9 @@ body.dark .clear-image-btn { background: var(--warm-card); color: #fca5a5; borde
   .bottom-callout { padding: 24px 36px; }
 }
 
+/* ── TOOL PAGE HERO COPY ────────────────────────────── */
+body.tool-page .page-hero p { max-width: none; }
+
 /* ── TOOL FOOTER ────────────────────────────────────── */
 .tool-footer {
   text-align: center;
@@ -1001,7 +1004,7 @@ body.dark .clear-image-btn { background: var(--warm-card); color: #fca5a5; borde
     min-height: clamp(100px, 20vh, 220px);
   }
   body.tool-page .page-hero h1 { font-size: clamp(26px, 5.2vh, 68px); margin-bottom: clamp(6px, 1.2vh, 14px); }
-  body.tool-page .page-hero p  { font-size: clamp(14px, 2vh, 20px); max-width: none; }
+  body.tool-page .page-hero p  { font-size: clamp(14px, 2vh, 20px); }
   body.tool-page .page-hero .updated-badge { margin-bottom: clamp(8px, 1.5vh, 18px); padding: clamp(4px, 0.8vh, 6px) 18px; }
 
   body.tool-page .content-area {
