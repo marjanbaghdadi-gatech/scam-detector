@@ -1,5 +1,17 @@
 [
   {
+    "id": "yt-w3EYKuFGJ5c",
+    "title": "The Fake Genius: a $30 BILLION Fraud.",
+    "source_url": "https://www.youtube.com/watch?v=w3EYKuFGJ5c",
+    "thumbnail_url": "https://i.ytimg.com/vi/w3EYKuFGJ5c/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA3l3SpV2lWNYRdFtcGz-hlIUDGJA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "crypto_scam",
+    "summary": "Sam Bankman-Fried's actions led to a massive financial fraud affecting countless investors.",
+    "confidence": "high",
+    "date_found": "2026-08-23"
+  },
+  {
     "id": "yt-4bWL_s3FmSQ",
     "title": "INVESTMENT FRAUD, Real Stories. Real People. Real Scams. - Documentary",
     "source_url": "https://www.youtube.com/watch?v=4bWL_s3FmSQ",
@@ -1184,18 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "other",
     "summary": "Kevin Trudeau conducted scams totaling $39 million through infomercials.",
-    "confidence": "high",
-    "date_found": "2026-05-31"
-  },
-  {
-    "id": "yt-Eu1sRx670U4",
-    "title": "Tricked Into Love: The Dark Truth of Holiday Romance Scams",
-    "source_url": "https://www.youtube.com/watch?v=Eu1sRx670U4",
-    "thumbnail_url": "https://i.ytimg.com/vi/Eu1sRx670U4/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD3P07FjwxcowQ_XzqwMgGLEl7sWg",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "The documentary reveals women who were deceived in holiday romance scams.",
     "confidence": "high",
     "date_found": "2026-05-31"
   }
