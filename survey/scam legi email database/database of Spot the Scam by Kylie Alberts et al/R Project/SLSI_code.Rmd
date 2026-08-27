@@ -1,0 +1,1332 @@
+---
+title: "SLSI"
+output: html_document
+date: "2025-04-28"
+---
+
+```{r}
+library(ggplot2)
+library(plyr)
+library(lme4)
+library(lmerTest)
+library(pbkrtest)
+library(dplyr)
+library(tidyverse)
+library(emmeans)
+
+# Specify the path to your folder
+folder_path <- "/Users/kyliealberts/Desktop/SLSI_data/SLSI3"
+
+# List all CSV files in the folder
+csv_files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check if a CSV file has a specific column
+has_verification_code <- function(file_path) {
+  # Read only the first row to check column names
+  data <- read_csv(file_path, n_max = 1, show_col_types = FALSE)
+  
+  # Check if 'Finish.timesOff' column exists
+  return("Finish.timesOff" %in% colnames(data))
+}
+
+# Initialize an empty dataframe to store all data
+all_data <- tibble()
+
+# Loop through files, load and append if it has the column
+for(file_path in csv_files) {
+  if(has_verification_code(file_path)) {
+    # Load the CSV file
+    data <- read_csv(file_path, show_col_types = FALSE)
+    
+    if ("participant" %in% colnames(data)) {
+      data$participant <- as.character(data$participant)
+      data$bruinID.text <- as.character(data$bruinID.text)
+    }
+
+    # Append to the master dataframe
+    all_data <- bind_rows(all_data, data)
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path, "\n")
+  }
+}
+
+```
+
+
+```{r}
+folder_path_o <- "/Users/kyliealberts/Desktop/SLSI_data/SLSI_O"
+
+# List all CSV files
+csv_files_o <- list.files(folder_path_o, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check for required column
+has_verification_code <- function(file_path_o) {
+  tryCatch({
+    data_o <- read_csv(file_path_o, n_max = 1, show_col_types = FALSE)
+    return("Finish.timesOff" %in% colnames(data_o))
+  }, error = function(e) {
+    cat("Error reading file:", file_path_o, "\n", e$message, "\n")
+    return(FALSE)
+  })
+}
+
+# Initialize empty master dataframe
+all_data_o <- tibble()
+
+# Loop through files
+for (i in seq_along(csv_files_o)) {
+  file_path_o <- csv_files_o[i]
+  
+  if (has_verification_code(file_path_o)) {
+    data_o <- tryCatch({
+      read_csv(file_path_o, show_col_types = FALSE)
+    }, error = function(e) {
+      cat("Skipping file due to read error:", file_path_o, "\n", e$message, "\n")
+      return(NULL)
+    })
+    
+    if (!is.null(data_o)) {
+      # Assign a unique participant number (101, 102, etc.)
+      participant_id <- 100 + i
+      data_o$participant2 <- as.character(participant_id)
+
+      # Harmonize column types even if some columns are missing
+      data_o$bruinID.text <- as.character(data_o$bruinID.text)
+      data_o$textboxAge.text <- as.character(data_o$textboxAge.text)
+      data_o$textboxAge_2.text <- as.character(data_o$textboxAge_2.text)
+      data_o$textboxBirthday.text <- as.character(data_o$textboxBirthday.text)
+      data_o$textboxCountry.text <- as.character(data_o$textboxCountry.text)
+      data_o$textboxQuestion2.text <- as.character(data_o$textboxQuestion2.text)
+      data_o$textboxQuestion3.text <- as.character(data_o$textboxQuestion3.text)
+
+      # Append to master dataframe
+      all_data_o <- bind_rows(all_data_o, data_o)
+    }
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_o, "\n")
+  }
+}
+```
+
+
+```{r}
+# Specify the path to your folder
+folder_path_2 <- "/Users/kyliealberts/Desktop/SLSI_data/SLSI4"
+
+# List all CSV files in the folder
+csv_files_2 <- list.files(folder_path_2, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check if a CSV file has a specific column
+has_verification_code <- function(file_path_2) {
+  # Read only the first row to check column names
+  data_2 <- read_csv(file_path_2, n_max = 1, show_col_types = FALSE)
+  
+  # Check if 'Finish.timesOff' column exists
+  return("Finish.timesOff" %in% colnames(data_2))
+}
+
+# Initialize an empty dataframe to store all data
+all_data_2 <- tibble()
+
+# Loop through files, load and append if it has the column
+for(file_path_2 in csv_files_2) {
+  if(has_verification_code(file_path_2)) {
+    # Load the CSV file
+    data_2 <- read_csv(file_path_2, show_col_types = FALSE)
+    
+    if ("participant" %in% colnames(data_2)) {
+      data_2$participant <- as.character(data_2$participant)
+      data_2$bruinID.text <- as.character(data_2$bruinID.text)
+    }
+
+    # Append to the master dataframe
+    all_data_2 <- bind_rows(all_data_2, data_2)
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_2, "\n")
+  }
+}
+
+```
+
+```{r}
+folder_path_2o <- "/Users/kyliealberts/Desktop/SLSI_data/SLSI2_O"
+
+# List all CSV files
+csv_files_2o <- list.files(folder_path_2o, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check for required column
+has_verification_code <- function(file_path_2o) {
+  tryCatch({
+    data_2o <- read_csv(file_path_2o, n_max = 1, show_col_types = FALSE)
+    return("Finish.timesOff" %in% colnames(data_2o))
+  }, error = function(e) {
+    cat("Error reading file:", file_path_2o, "\n", e$message, "\n")
+    return(FALSE)
+  })
+}
+
+# Initialize empty master dataframe
+all_data_2o <- tibble()
+
+# Loop through files
+for (i in seq_along(csv_files_2o)) {
+  file_path_2o <- csv_files_2o[i]
+  
+  if (has_verification_code(file_path_2o)) {
+    data_2o <- tryCatch({
+      read_csv(file_path_2o, show_col_types = FALSE)
+    }, error = function(e) {
+      cat("Skipping file due to read error:", file_path_2o, "\n", e$message, "\n")
+      return(NULL)
+    })
+    
+    if (!is.null(data_2o)) {
+      # Assign a unique participant number (101, 102, etc.)
+      participant_id <- 200 + i
+      data_2o$participant2 <- as.character(participant_id)
+
+      # Harmonize column types even if some columns are missing
+      data_2o$bruinID.text <- as.character(data_2o$bruinID.text)
+      data_2o$textboxAge.text <- as.character(data_2o$textboxAge.text)
+      data_2o$textboxAge_2.text <- as.character(data_2o$textboxAge_2.text)
+      data_2o$textboxBirthday.text <- as.character(data_2o$textboxBirthday.text)
+      data_2o$textboxCountry.text <- as.character(data_2o$textboxCountry.text)
+      data_2o$textboxQuestion2.text <- as.character(data_2o$textboxQuestion2.text)
+      data_2o$textboxQuestion3.text <- as.character(data_2o$textboxQuestion3.text)
+
+      # Append to master dataframe
+      all_data_2o <- bind_rows(all_data_2o, data_2o)
+    }
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_2o, "\n")
+  }
+}
+```
+
+
+
+
+
+```{r}
+# Specify the path to your folder
+folder_path_c <- "/Users/kyliealberts/Desktop/SLSI_data/SLSIC"
+
+# List all CSV files in the folder
+csv_files_c <- list.files(folder_path_c, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check if a CSV file has a specific column
+has_verification_code <- function(file_path_c) {
+  # Read only the first row to check column names
+  data_c <- read_csv(file_path_c, n_max = 1, show_col_types = FALSE)
+  
+  # Check if 'Finish.timesOff' column exists
+  return("Finish.timesOff" %in% colnames(data_c))
+}
+
+# Initialize an empty dataframe to store all data
+all_data_c <- tibble()
+
+# Loop through files, load and append if it has the column
+for(file_path_c in csv_files_c) {
+  if(has_verification_code(file_path_c)) {
+    # Load the CSV file
+    data_c <- read_csv(file_path_c, show_col_types = FALSE)
+    
+    if ("participant" %in% colnames(data_c)) {
+      data_c$participant <- as.character(data_c$participant)
+      data_c$bruinID.text <- as.character(data_c$bruinID.text)
+      data_c$textboxAge.text <- as.character(data_c$textboxAge.text)
+      data_c$textboxAge_2.text <- as.character(data_c$textboxAge_2.text)
+    }
+
+    # Append to the master dataframe
+    all_data_c <- bind_rows(all_data_c, data_c)
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_c, "\n")
+  }
+}
+
+```
+
+```{r}
+# Specify the path to your folder
+# Set path to folder
+folder_path_co <- "/Users/kyliealberts/Desktop/SLSI_data/SLSIC_O"
+
+# List all CSV files
+csv_files_co <- list.files(folder_path_co, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check for required column
+has_verification_code <- function(file_path_co) {
+  tryCatch({
+    data_co <- read_csv(file_path_co, n_max = 1, show_col_types = FALSE)
+    return("Finish.timesOff" %in% colnames(data_co))
+  }, error = function(e) {
+    cat("Error reading file:", file_path_co, "\n", e$message, "\n")
+    return(FALSE)
+  })
+}
+
+# Initialize empty master dataframe
+all_data_co <- tibble()
+
+# Loop through files
+for (i in seq_along(csv_files_co)) {
+  file_path_co <- csv_files_co[i]
+  
+  if (has_verification_code(file_path_co)) {
+    data_co <- tryCatch({
+      read_csv(file_path_co, show_col_types = FALSE)
+    }, error = function(e) {
+      cat("Skipping file due to read error:", file_path_co, "\n", e$message, "\n")
+      return(NULL)
+    })
+    
+    if (!is.null(data_co)) {
+      # Assign a unique participant number (101, 102, etc.)
+      participant_id <- 300 + i
+      data_co$participant <- as.character(participant_id)
+
+      # Harmonize column types even if some columns are missing
+      data_co$bruinID.text <- as.character(data_co$bruinID.text)
+      data_co$textboxAge.text <- as.character(data_co$textboxAge.text)
+      data_co$textboxAge_2.text <- as.character(data_co$textboxAge_2.text)
+
+      # Append to master dataframe
+      all_data_co <- bind_rows(all_data_co, data_co)
+    }
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_co, "\n")
+  }
+}
+```
+
+
+```{r}
+# Specify the path to your folder
+folder_path_c2 <- "/Users/kyliealberts/Desktop/SLSI_data/SLSIC2"
+
+# List all CSV files in the folder
+csv_files_c2 <- list.files(folder_path_c2, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check if a CSV file has a specific column
+has_verification_code <- function(file_path_c2) {
+  # Read only the first row to check column names
+  data_c2 <- read_csv(file_path_c2, n_max = 1, show_col_types = FALSE)
+  
+  # Check if 'Finish.timesOff' column exists
+  return("Finish.timesOff" %in% colnames(data_c2))
+}
+
+# Initialize an empty dataframe to store all data
+all_data_c2 <- tibble()
+
+# Loop through files, load and append if it has the column
+for(file_path_c2 in csv_files_c2) {
+  if(has_verification_code(file_path_c2)) {
+    # Load the CSV file
+    data_c2 <- read_csv(file_path_c2, show_col_types = FALSE)
+    
+    if ("participant" %in% colnames(data_c2)) {
+      data_c2$participant <- as.character(data_c2$participant)
+      data_c2$bruinID.text <- as.character(data_c2$bruinID.text)
+    }
+
+    # Append to the master dataframe
+    all_data_c2 <- bind_rows(all_data_c2, data_c2)
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_c2, "\n")
+  }
+}
+
+```
+```{r}
+folder_path_co2 <- "/Users/kyliealberts/Desktop/SLSI_data/SLSIC2_O"
+
+# List all CSV files
+csv_files_co2 <- list.files(folder_path_co2, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check for required column
+has_verification_code <- function(file_path_co2) {
+  tryCatch({
+    data_co2 <- read_csv(file_path_co2, n_max = 1, show_col_types = FALSE)
+    return("Finish.timesOff" %in% colnames(data_co))
+  }, error = function(e) {
+    cat("Error reading file:", file_path_co2, "\n", e$message, "\n")
+    return(FALSE)
+  })
+}
+
+# Initialize empty master dataframe
+all_data_co2 <- tibble()
+
+# Loop through files
+for (i in seq_along(csv_files_co2)) {
+  file_path_co2 <- csv_files_co2[i]
+  
+  if (has_verification_code(file_path_co2)) {
+    data_co2 <- tryCatch({
+      read_csv(file_path_co2, show_col_types = FALSE)
+    }, error = function(e) {
+      cat("Skipping file due to read error:", file_path_co2, "\n", e$message, "\n")
+      return(NULL)
+    })
+    
+    if (!is.null(data_co2)) {
+      # Assign a unique participant number (101, 102, etc.)
+      participant_id <- 400 + i
+      data_co2$participant <- as.character(participant_id)
+
+      # Harmonize column types even if some columns are missing
+      data_co2$bruinID.text <- as.character(data_co2$bruinID.text)
+      data_co2$textboxAge.text <- as.character(data_co2$textboxAge.text)
+      data_co2$textboxAge_2.text <- as.character(data_co2$textboxAge_2.text)
+      data_co2$textboxBirthday.text <- as.character(data_co2$textboxBirthday.text)
+      data_co2$textboxCountry.text <- as.character(data_co2$textboxCountry.text)
+      data_co2$textboxQuestion2.text <- as.character(data_co2$textboxQuestion2.text)
+      data_co2$textboxQuestion3.text <- as.character(data_co2$textboxQuestion3.text)
+
+      # Append to master dataframe
+      all_data_co2 <- bind_rows(all_data_co2, data_co2)
+    }
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_co2, "\n")
+  }
+}
+```
+
+```{r}
+# Specify the path to your folder
+folder_path_nc <- "/Users/kyliealberts/Desktop/SLSI_data/SLSINC"
+
+# List all CSV files in the folder
+csv_files_nc <- list.files(folder_path_nc, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check if a CSV file has a specific column
+has_verification_code <- function(file_path_nc) {
+  # Read only the first row to check column names
+  data_nc <- read_csv(file_path_nc, n_max = 1, show_col_types = FALSE)
+  
+  # Check if 'Finish.timesOff' column exists
+  return("Finish.timesOff" %in% colnames(data_nc))
+}
+
+# Initialize an empty dataframe to store all data
+all_data_nc <- tibble()
+
+# Loop through files, load and append if it has the column
+for(file_path_nc in csv_files_nc) {
+  if(has_verification_code(file_path_nc)) {
+    # Load the CSV file
+    data_nc <- read_csv(file_path_nc, show_col_types = FALSE)
+    
+    if ("participant" %in% colnames(data_nc)) {
+      data_nc$participant <- as.character(data_nc$participant)
+      data_nc$bruinID.text <- as.character(data_nc$bruinID.text)
+      data_nc$textboxAge.text <- as.character(data_nc$textboxAge.text)
+      data_nc$textboxAge_2.text <- as.character(data_nc$textboxAge_2.text)
+    }
+
+    # Append to the master dataframe
+    all_data_nc <- bind_rows(all_data_nc, data_nc)
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_nc, "\n")
+  }
+}
+
+```
+
+```{r}
+folder_path_nco <- "/Users/kyliealberts/Desktop/SLSI_data/SLSINC_O"
+
+# List all CSV files
+csv_files_nco <- list.files(folder_path_nco, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check for required column
+has_verification_code <- function(file_path_nco) {
+  tryCatch({
+    data_nco <- read_csv(file_path_nco, n_max = 1, show_col_types = FALSE)
+    return("Finish.timesOff" %in% colnames(data_nco))
+  }, error = function(e) {
+    cat("Error reading file:", file_path_nco, "\n", e$message, "\n")
+    return(FALSE)
+  })
+}
+
+# Initialize empty master dataframe
+all_data_nco <- tibble()
+
+# Loop through files
+for (i in seq_along(csv_files_nco)) {
+  file_path_nco <- csv_files_nco[i]
+  
+  if (has_verification_code(file_path_nco)) {
+    data_nco <- tryCatch({
+      read_csv(file_path_nco, show_col_types = FALSE)
+    }, error = function(e) {
+      cat("Skipping file due to read error:", file_path_nco, "\n", e$message, "\n")
+      return(NULL)
+    })
+    
+    if (!is.null(data_nco)) {
+      # Assign a unique participant number (101, 102, etc.)
+      participant_id <- 500 + i
+      data_nco$participant <- as.character(participant_id)
+
+      # Harmonize column types even if some columns are missing
+      data_nco$bruinID.text <- as.character(data_nco$bruinID.text)
+      data_nco$textboxAge.text <- as.character(data_nco$textboxAge.text)
+      data_nco$textboxAge_2.text <- as.character(data_nco$textboxAge_2.text)
+      data_nco$textboxBirthday.text <- as.character(data_nco$textboxBirthday.text)
+      data_nco$textboxCountry.text <- as.character(data_nco$textboxCountry.text)
+      data_nco$textboxQuestion2.text <- as.character(data_nco$textboxQuestion2.text)
+      data_nco$textboxQuestion3.text <- as.character(data_nco$textboxQuestion3.text)
+
+      # Append to master dataframe
+      all_data_nco <- bind_rows(all_data_nco, data_nco)
+    }
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_nco, "\n")
+  }
+}
+```
+
+
+```{r}
+# Specify the path to your folder
+folder_path_nc2 <- "/Users/kyliealberts/Desktop/SLSI_data/SLSINC3"
+
+# List all CSV files in the folder
+csv_files_nc2 <- list.files(folder_path_nc2, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check if a CSV file has a specific column
+has_verification_code <- function(file_path_nc2) {
+  # Read only the first row to check column names
+  data_nc2 <- read_csv(file_path_nc2, n_max = 1, show_col_types = FALSE)
+  
+  # Check if 'Finish.timesOff' column exists
+  return("Finish.timesOff" %in% colnames(data_nc2))
+}
+
+# Initialize an empty dataframe to store all data
+all_data_nc2 <- tibble()
+
+# Loop through files, load and append if it has the column
+for(file_path_nc2 in csv_files_nc2) {
+  if(has_verification_code(file_path_nc2)) {
+    # Load the CSV file
+    data_nc2 <- read_csv(file_path_nc2, show_col_types = FALSE)
+    
+    if ("participant" %in% colnames(data_nc2)) {
+      data_nc2$participant <- as.character(data_nc2$participant)
+      data_nc2$bruinID.text <- as.character(data_nc2$bruinID.text)
+      data_nc2$textboxAge.text <- as.character(data_nc2$textboxAge.text)
+      data_nc2$textboxAge_2.text <- as.character(data_nc2$textboxAge_2.text)
+      data_nc2$textboxBirthday.text <- as.character(data_nc2$textboxBirthday.text)
+    }
+
+    # Append to the master dataframe
+    all_data_nc2 <- bind_rows(all_data_nc2, data_nc2)
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_nc2, "\n")
+  }
+}
+
+```
+
+```{r}
+folder_path_nc2o <- "/Users/kyliealberts/Desktop/SLSI_data/SLSINC2_O"
+
+# List all CSV files
+csv_files_nc2o <- list.files(folder_path_nc2o, pattern = "\\.csv$", full.names = TRUE)
+
+# Function to check for required column
+has_verification_code <- function(file_path_nc2o) {
+  tryCatch({
+    data_nc2o <- read_csv(file_path_nc2o, n_max = 1, show_col_types = FALSE)
+    return("Finish.timesOff" %in% colnames(data_nc2o))
+  }, error = function(e) {
+    cat("Error reading file:", file_path_nc2o, "\n", e$message, "\n")
+    return(FALSE)
+  })
+}
+
+# Initialize empty master dataframe
+all_data_nc2o <- tibble()
+
+# Loop through files
+for (i in seq_along(csv_files_nc2o)) {
+  file_path_nc2o <- csv_files_nc2o[i]
+  
+  if (has_verification_code(file_path_nc2o)) {
+    data_nc2o <- tryCatch({
+      read_csv(file_path_nc2o, show_col_types = FALSE)
+    }, error = function(e) {
+      cat("Skipping file due to read error:", file_path_nc2o, "\n", e$message, "\n")
+      return(NULL)
+    })
+    
+    if (!is.null(data_nc2o)) {
+      # Assign a unique participant number (101, 102, etc.)
+      participant_id <- 600 + i
+      data_nc2o$participant <- as.character(participant_id)
+
+      # Harmonize column types even if some columns are missing
+      data_nc2o$bruinID.text <- as.character(data_nc2o$bruinID.text)
+      data_nc2o$textboxAge.text <- as.character(data_nc2o$textboxAge.text)
+      data_nc2o$textboxAge_2.text <- as.character(data_nc2o$textboxAge_2.text)
+      data_nc2o$textboxBirthday.text <- as.character(data_nc2o$textboxBirthday.text)
+      data_nc2o$textboxCountry.text <- as.character(data_nc2o$textboxCountry.text)
+      data_nc2o$textboxQuestion2.text <- as.character(data_nc2o$textboxQuestion2.text)
+      data_nc2o$textboxQuestion3.text <- as.character(data_nc2o$textboxQuestion3.text)
+
+      # Append to master dataframe
+      all_data_nc2o <- bind_rows(all_data_nc2o, data_nc2o)
+    }
+  } else {
+    cat("Skipping file, does not have 'Finish.timesOff' column:", file_path_nc2o, "\n")
+  }
+}
+```
+
+
+```{r}
+all_data <- all_data %>% select(participant, subjage_slider.response,confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention <- all_data %>% select(participant, textboxQuestion2.text) %>% drop_na()
+#all_data$agegroup <- 'Young'
+all_data <- subset(all_data, !(participant %in% c("880609", "027890", "062271", 
+                                                  "154595", "398677", "444905", 
+                                                  "507175", "594802", "646050", 
+                                                  "664028", "742329", "898832", 
+                                                  "956008", "958726", "412575", 
+                                                  "865972", "891588", "926613",
+                                                  "958120", "965768", "983476",
+                                                  "989126", "999940")))
+
+counts_a <- ddply(all_data, .(all_data$participant), nrow)
+names(counts_a) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_o <- all_data_o %>% select(participant2,subjage_slider.response, confidence_scale.response,button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_o <- all_data_o %>% select(participant2, textboxQuestion2.text) %>% drop_na()
+#all_data$agegroup <- 'Young'
+all_data_o <- subset(all_data_o, !(participant2 %in% c("121", "120", "119")))
+
+counts_ao <- ddply(all_data_o, .(all_data_o$participant2), nrow)
+names(counts_ao) <- c("ID", "Freq")
+
+
+all_data_o <- all_data_o %>%
+  rename(participant = participant2)
+```
+
+
+```{r}
+all_data_2 <- all_data_2 %>% select(participant,subjage_slider.response, confidence_scale.response,button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_2 <- all_data_2 %>% select(participant, textboxQuestion2.text) %>% drop_na()
+
+#all_data$agegroup <- 'Young'
+
+counts_a2 <- ddply(all_data_2, .(all_data_2$participant), nrow)
+names(counts_a2) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_2o <- all_data_2o %>% select(participant2,subjage_slider.response, confidence_scale.response,button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+#attention_2o <- all_data_2o %>% select(participant, textboxQuestion2.text) %>% drop_na()
+attention_2o <- all_data_2o %>% select(participant2, textboxQuestion2.text) %>% drop_na()
+#all_data$agegroup <- 'Young'
+
+all_data_2o <- subset(all_data_2o, !(participant2 %in% c("209", "220")))
+
+counts_a2o <- ddply(all_data_2o, .(all_data_2o$participant2), nrow)
+names(counts_a2o) <- c("ID", "Freq")
+
+all_data_2o <- all_data_2o %>%
+  rename(participant = participant2)
+```
+
+
+```{r}
+all_data_c <- all_data_c %>% select(participant, subjage_slider.response, confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_c <- all_data_c %>% select(participant, textboxQuestion2.text) %>% drop_na()
+#all_data$agegroup <- 'Young'
+all_data_c <- subset(all_data_c, !(participant %in% c("195725", "321859", "491577")))
+
+counts_c <- ddply(all_data_c, .(all_data_c$participant), nrow)
+names(counts_c) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_co <- all_data_co %>% select(participant, subjage_slider.response, confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_co <- all_data_co %>% select(participant, textboxQuestion2.text) %>% drop_na()
+#all_data$agegroup <- 'Young'
+all_data_co <- subset(all_data_co, !(participant %in% c("320", "319")))
+
+counts_co <- ddply(all_data_co, .(all_data_co$participant), nrow)
+names(counts_co) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_c2 <- all_data_c2 %>% select(participant,subjage_slider.response, confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_c2 <- all_data_c2 %>% select(participant, textboxQuestion2.text) %>% drop_na()
+
+all_data_c2 <- subset(all_data_c2, !(participant %in% c("196957", "518772", "698712")))
+#all_data$agegroup <- 'Young'
+
+counts_c2 <- ddply(all_data_c2, .(all_data_c2$participant), nrow)
+names(counts_c2) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_co2 <- all_data_co2 %>% select(participant,subjage_slider.response, confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_co2 <- all_data_co2 %>% select(participant, textboxQuestion2.text) %>% drop_na()
+
+all_data_co2 <- subset(all_data_co2, !(participant %in% c("416")))
+#all_data$agegroup <- 'Young'
+
+counts_co2 <- ddply(all_data_co2, .(all_data_co2$participant), nrow)
+names(counts_co2) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_nc <- all_data_nc %>% select(participant,subjage_slider.response,confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_nc <- all_data_nc %>% select(participant, textboxQuestion2.text) %>% drop_na()
+
+all_data_nc <- subset(all_data_nc, !(participant %in% c("339398", "433190", "680443", "815593", "812787", "636451", "451605")))
+
+#all_data$agegroup <- 'Young'
+
+counts_nc <- ddply(all_data_nc, .(all_data_nc$participant), nrow)
+names(counts_nc) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_nco <- all_data_nco %>% select(participant,subjage_slider.response,confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_nco <- all_data_nco %>% select(participant, textboxQuestion2.text) %>% drop_na()
+
+all_data_nco <- subset(all_data_nco, !(participant %in% c("516", "501", "506")))
+
+#all_data$agegroup <- 'Young'
+
+counts_nco <- ddply(all_data_nco, .(all_data_nco$participant), nrow)
+names(counts_nco) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_nc2 <- all_data_nc2 %>% select(participant,subjage_slider.response,confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_nc2 <- all_data_nc2 %>% select(participant, textboxQuestion2.text) %>% drop_na()
+
+all_data_nc2 <- subset(all_data_nc2, !(participant %in% c("135211", "806070", "823722", 
+                                                          "844981", "864718", "202658")))
+
+#all_data$agegroup <- 'Young'
+
+counts_nc2 <- ddply(all_data_nc2, .(all_data_nc2$participant), nrow)
+names(counts_nc2) <- c("ID", "Freq")
+```
+
+```{r}
+all_data_nc2o <- all_data_nc2o %>% select(participant,subjage_slider.response,confidence_scale.response, button_selections_1, confidence_scale_email.response, personal_rel_scale.response,curiosity_scale.response, emails, type,slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response, Gender, textboxAge.text, textboxQuestion2.text)
+
+attention_nc2o <- all_data_nc2o %>% select(participant, textboxQuestion2.text) %>% drop_na()
+
+all_data_nc2o <- subset(all_data_nc2o, !(participant %in% c("611", "614")))
+
+#all_data$agegroup <- 'Young'
+
+counts_nc2o <- ddply(all_data_nc2o, .(all_data_nc2o$participant), nrow)
+names(counts_nc2o) <- c("ID", "Freq")
+```
+
+
+```{r}
+#combining data
+all_data_all <- rbind(all_data, all_data_2)
+all_data_c_all <- rbind(all_data_c, all_data_c2)
+all_data_nc_all <- rbind(all_data_nc, all_data_nc2)
+
+all_data_all$Study <- 'Interactive'
+all_data_c_all$Study <- 'Control'
+all_data_nc_all$Study <- 'Read'
+
+all_data_combined <- rbind(all_data_all, all_data_c_all)
+all_data_combined <- rbind(all_data_combined, all_data_nc_all)
+
+all_data_combined$agegroup <- 'Young'
+```
+
+```{r}
+#combining data
+all_data_all_o <- rbind(all_data_o, all_data_2o)
+all_data_c_all_o <- rbind(all_data_co, all_data_co2)
+all_data_nc_all_o <- rbind(all_data_nco, all_data_nc2o)
+
+all_data_all_o$Study <- 'Interactive'
+all_data_c_all_o$Study <- 'Control'
+all_data_nc_all_o$Study <- 'Read'
+
+all_data_combined_o <- rbind(all_data_all_o, all_data_c_all_o)
+all_data_combined_o <- rbind(all_data_combined_o, all_data_nc_all_o)
+
+all_data_combined_o$agegroup <- 'Older'
+
+all_data_combined_all <- rbind(all_data_combined, all_data_combined_o)
+```
+
+
+```{r}
+all_data_y_age <- all_data_combined %>% select(participant, textboxAge.text) %>% na.omit()
+all_data_o_age <- all_data_combined_o %>% select(participant, textboxAge.text) %>% na.omit()
+
+mean(all_data_y_age$textboxAge.text)
+range(all_data_y_age$textboxAge.text)
+sd(all_data_y_age$textboxAge.text)
+
+mean(all_data_o_age$textboxAge.text)
+range(all_data_o_age$textboxAge.text)
+sd(all_data_o_age$textboxAge.text)
+```
+
+
+```{r}
+all_data_small <- all_data_combined_all %>% select(participant, button_selections_1, confidence_scale_email.response, personal_rel_scale.response, curiosity_scale.response, emails, type, Study, agegroup)
+
+all_data_small <- all_data_small %>%
+  mutate(participant = as.factor(participant))
+
+library(dplyr)
+# Function to tag chunk number per participant
+# Function to tag chunk number per participant
+
+tag_chunks <- function(df) {
+  df %>%
+    dplyr::group_by(participant) %>%
+    dplyr::mutate(
+      is_na_row = is.na(emails),
+      chunk = cumsum(lag(is_na_row, default = FALSE)) + 1
+    ) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(-is_na_row)
+}
+
+df_tagged <- tag_chunks(all_data_small) 
+```
+
+```{r}
+df_tagged <- df_tagged %>%
+  dplyr::rename(Time = chunk)
+
+df_tagged$Time <- ifelse(df_tagged$Time == 7, "Pre", df_tagged$Time)
+df_tagged$Time <- ifelse(df_tagged$Time == 12, "Post", df_tagged$Time)
+df_tagged$Time <- ifelse(df_tagged$Time == 15, "Post", df_tagged$Time)
+df_tagged$Time <- ifelse(df_tagged$Time == 22, "Post", df_tagged$Time)
+
+all_df <- na.omit(df_tagged)
+
+all_df <- mutate(all_df, 
+                    Response = if_else(str_detect(all_df$button_selections_1, "legit"), "legit","scam")) 
+
+all_df <- all_df %>% select(-button_selections_1)
+all_df$accurate = ifelse(all_df$type == all_df$Response, 1,0)
+
+write.csv(all_df, "SLSI_all_data_check.csv")
+```
+
+```{r}
+all_df$SDT <- " "
+all_df <- all_df %>%
+  mutate(
+    SDT = case_when(
+      type == "scam"  & Response == "scam"  ~ "Hit",
+      type == "scam"  & Response == "legit" ~ "Miss",
+      type == "legit" & Response == "legit" ~ "Correct_R",
+      type == "legit" & Response == "scam"  ~ "False_A",
+      TRUE ~ NA_character_
+    )
+  )
+
+
+```
+
+```{r}
+dprime_df <- all_df %>%
+  dplyr::count(participant, Time, Study,agegroup, SDT) %>%  
+  pivot_wider(
+    names_from = SDT,
+    values_from = n,
+    values_fill = 0
+  )
+
+dprime <- function(Hit, Miss, False_A, Correct_R) {
+  signal_trials <- Hit + Miss
+  noise_trials <- False_A + Correct_R
+  
+  hit_rate <- (Hit+ .5) / (signal_trials + 1)
+  fa_rate  <- (False_A + .5) / (noise_trials + 1)
+  
+  qnorm(hit_rate) - qnorm(fa_rate)
+}
+
+# Apply to each row
+dprime_df <- dprime_df %>%
+  rowwise() %>%
+  mutate(d_prime = dprime(Hit, Miss, False_A, Correct_R)) %>%
+  ungroup()
+```
+
+```{r}
+#adding subjective age and pre confidence
+all_data_sub_age <- all_data_combined_all %>% select(participant, subjage_slider.response) %>% na.omit()
+all_data_overall_con <- all_data_combined_all %>% select(participant, confidence_scale.response) %>% na.omit()
+
+dprime_df <- merge(dprime_df, all_data_sub_age, by = "participant")
+dprime_df <- merge(dprime_df, all_data_overall_con, by = "participant")
+```
+
+
+```{r}
+library(lmerTest)
+dprime_df$Time <- as.factor(dprime_df$Time)
+dprime_df$Study <- as.factor(dprime_df$Study)
+dprime_df$participant <- as.factor(dprime_df$participant)
+dprime_df$agegroup <- as.factor(dprime_df$agegroup)
+
+model_dprime <- lmer(d_prime ~ confidence_scale.response + (1 | participant), data = dprime_df)
+
+#model_dprime2 <- lmer(d_prime ~ confidence_scale.response + (1 | participant), data = dprime_df)
+summary(model_dprime)
+
+#anova(model_dprime, model_dprime2)
+
+```
+
+
+```{r}
+library(lmerTest)
+library(car)
+##accuracy model just to see 
+all_df$type <- as.factor(all_df$type)
+all_df$Time <- as.factor(all_df$Time)
+all_df$Study <- as.factor(all_df$Study)
+all_df$agegroup <- as.factor(all_df$agegroup)
+write.csv(all_df, "all_df_SLSI.csv")
+#all_df$confidence_scale_email.response <- as.factor(all_df$confidence_scale_email.response)
+#all_df$personal_rel_scale.response <- as.factor(all_df$personal_rel_scale.response)
+#all_df$curiosity_scale.response <- as.factor(all_df$curiosity_scale.response)
+all_df$participant <- as.factor(all_df$participant)
+all_df$emails <- as.factor(all_df$emails)
+#accuracy
+accuracy_model <- glmer(accurate ~confidence_scale_email.response*type*Time*Study + personal_rel_scale.response*agegroup + agegroup  + (1 | participant) + (1 | emails), data = all_df, family = binomial)
+
+summary(accuracy_model)
+
+######DID NOT CONVERGE SO THIS IS BAD
+```
+
+```{r}
+
+emmeans_pairwise_acc_study <- emmeans(accuracy_model, pairwise ~ Study)
+summary(emmeans_pairwise_acc_study)
+
+```
+
+```{r}
+emmeans_pairwise_acc_con_study <- emtrends(accuracy_model, ~ Study, var = "confidence_scale_email.response")
+
+summary(emmeans_pairwise_acc_con_study, infer = c(TRUE, TRUE))
+pairs(emmeans_pairwise_acc_con_study)
+```
+
+```{r}
+emmeans_pairwise_acc_con_type_study <- emtrends(accuracy_model, ~ Study*type, var = "confidence_scale_email.response")
+
+summary(emmeans_pairwise_acc_con_type_study, infer = c(TRUE, TRUE))
+pairs(emmeans_pairwise_acc_con_type_study)
+
+```
+
+```{r}
+emmeans_pairwise_acc_con_time_study <- emtrends(accuracy_model, ~ Study*Time, var = "confidence_scale_email.response")
+
+summary(emmeans_pairwise_acc_con_time_study, , infer = c(TRUE, TRUE))
+pairs(emmeans_pairwise_acc_con_time_study)
+```
+
+```{r}
+emmeans_pairwise_acc_study_time <- emmeans(accuracy_model, pairwise ~ Time*Study)
+summary(emmeans_pairwise_acc_study_time)
+
+```
+
+```{r}
+emmeans_pairwise_acc <- emmeans(accuracy_model, pairwise ~ type*Study*Time)
+summary(emmeans_pairwise_acc)
+
+```
+
+```{r}
+emmeans_pairwise_acc_con <- emtrends(accuracy_model, ~ Study*type*Time, var = "confidence_scale_email.response")
+
+summary(emmeans_pairwise_acc_con, infer = c(TRUE, TRUE))
+pairs(emmeans_pairwise_acc_con)
+```
+
+
+```{r}
+average_confidence_accuracy <- all_df %>%
+  group_by(participant, Study, type) %>%
+  summarize(
+    mean_accuracy = mean(accurate, na.rm = TRUE),
+    mean_confidence = mean(confidence_scale_email.response, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+average_confidence_accuracy_legit <- subset(average_confidence_accuracy, !(type %in% c("scam")))
+
+figure_accuracy_con_legit <- ggplot(data = average_confidence_accuracy_legit, aes(x = mean_accuracy, y = mean_confidence, fill = Study)) +
+  geom_point() + geom_smooth()+
+  labs(x = "Accuracy", y = "Confidence") +
+  theme(text = element_text(size = 16, family = "Times New Roman"), 
+        panel.background = element_rect(fill = 'transparent'), 
+        axis.line.x = element_line(color = "black", size = .3), 
+        axis.line.y = element_line(color = "black", size = .3), 
+        axis.ticks.x = element_blank()) +
+  theme_classic()
+
+figure_accuracy_con_legit
+
+average_confidence_accuracy_scam <- subset(average_confidence_accuracy, !(type %in% c("legit")))
+
+figure_accuracy_con_scam <- ggplot(data = average_confidence_accuracy_scam, aes(x = mean_accuracy, y = mean_confidence, fill = Study)) +
+  geom_point() + geom_smooth()+
+  labs(x = "Accuracy", y = "Confidence") +
+  theme(text = element_text(size = 16, family = "Times New Roman"), 
+        panel.background = element_rect(fill = 'transparent'), 
+        axis.line.x = element_line(color = "black", size = .3), 
+        axis.line.y = element_line(color = "black", size = .3), 
+        axis.ticks.x = element_blank()) +
+  theme_classic()
+
+figure_accuracy_con_scam
+```
+```{r}
+
+all_df$conf_scaled <- scale(all_df$confidence_scale_email.response)
+
+accuracy_model <- glmer(accurate ~ type*Time*Study*conf_scaled + agegroup + (1 | participant) + (1 | emails), data = all_df, family = binomial, control = glmerControl(optimizer = "bobyqa"))
+#library(modelsummary)
+#get_gof(accuracy_model)
+
+summary(accuracy_model)
+```
+
+
+```{r}
+emmeans_pairwise_acc <- emmeans(accuracy_model, pairwise ~ Study)
+summary(emmeans_pairwise_acc)
+
+emmeans_pairwise_acc_age <- emmeans(accuracy_model, pairwise ~ agegroup)
+summary(emmeans_pairwise_acc_age)
+
+emmeans_pairwise_acc <- emmeans(accuracy_model, pairwise ~ Study*type)
+summary(emmeans_pairwise_acc)
+
+emmeans_pairwise_acc <- emmeans(accuracy_model, pairwise ~ Study*Time)
+summary(emmeans_pairwise_acc)
+
+emtrendstudy_conf <- emtrends(accuracy_model, ~ Study, var = "conf_scaled")
+summary(emtrendstudy_conf)
+
+emmeans_pairwise_acc <- emmeans(accuracy_model, pairwise ~ Study*Time*type)
+summary(emmeans_pairwise_acc)
+
+emtrendstudytype_conf <- emtrends(accuracy_model, ~ Study*type, var = "conf_scaled")
+summary(emtrendstudytype_conf)
+
+emtrendstudytime_conf <- emtrends(accuracy_model, ~ Study*Time, var = "conf_scaled")
+summary(emtrendstudytime_conf)
+
+emtrendstudytimetype_conf <- emtrends(accuracy_model, ~ Study*Time*type, var = "conf_scaled")
+summary(emtrendstudytimetype_conf)
+
+
+```
+
+
+```{r}
+library(ggsignif)
+average_df <- all_df %>% 
+  group_by(type, Time, Study) %>% summarise_at(vars(accurate), list(accurate = mean))
+
+average_df$Time <- factor(average_df$Time, levels = c("Pre", "Post"))
+average_df$Study <- factor(average_df$Study, levels = c("Control", "Read", "Interactive"))
+
+
+figure_accuracy <- ggplot(data=average_df, aes(x=type, y=accurate, fill=Time)) +
+geom_bar(stat="identity", position=position_dodge(), col = "black")+
+  facet_wrap(~Study)+
+  guides(fill = guide_legend(reverse = FALSE)) +
+  labs(x = " ",y = "Accuracy") +
+  theme(text=element_text(size=16,  family="Times New Roman"), panel.background = element_rect(fill='transparent'),legend.direction = "horizontal",legend.position = c(0.6, 0.8), axis.line.x = element_line(color="black", size = .3), axis.line.y = element_line(color="black", size = .3), axis.ticks.x=element_blank())+
+  scale_fill_manual(values = c("black", "white"),name="")+ 
+theme_classic() +   ylim(0,1) 
+   #geom_text(data = annotation_hy, aes(x = x, y = y, label = label), color = "black", inherit.aes = FALSE, size = 6)+
+ # geom_segment(data = segment_df_hy,
+  #           aes(x = x, xend = xend, y = y, yend = yend),
+ #            inherit.aes = FALSE,
+  #           color = "black",
+  #           size = 0.5)+
+  #geom_errorbar(aes(ymin=textbox_comp.text-sd, ymax=textbox_comp.text+sd), width=0.2, colour="gray27", position=position_dodge(.9)) +
+  #ylim(0,1) 
+
+figure_accuracy
+
+```
+
+```{r}
+average_df$Study_type <- interaction(average_df$Study, average_df$type)
+
+# Step 2: Define the desired order
+desired_order <- c("Control.legit", "Control.scam", "Read.legit", "Read.scam", "Interactive.legit", "Interactive.scam")  # adjust as needed
+
+# Step 3: Convert to factor with specific order
+average_df$Study_type <- factor(average_df$Study_type, levels = desired_order)
+
+
+figure_accuracy_2 <- ggplot(data = average_df, aes(x = Study_type, y = accurate, fill = Time)) +
+  geom_bar(stat = "identity", position = position_dodge(), col = "black") +
+  guides(fill = guide_legend(reverse = FALSE)) +
+  labs(x = "Study and Time", y = "Accuracy") +
+  theme(text = element_text(size = 16, family = "Times New Roman"), 
+        panel.background = element_rect(fill = 'transparent'), 
+        legend.direction = "horizontal", 
+        legend.position = c(0.6, 0.8), 
+        axis.line.x = element_line(color = "black", size = .3), 
+        axis.line.y = element_line(color = "black", size = .3), 
+        axis.ticks.x = element_blank()) +
+  scale_fill_manual(values = c("black", "white"), name = "") + 
+  theme_classic() +
+  #annotate("text", x = 3, y = .95, label = "***", size = 6, color = "black") +
+  #geom_segment(aes(x = 1.2, xend = 5.2, y = .95, yend = .95), color = "black", size = .3)+
+  
+  #annotate("text", x = 4.5, y = 1, label = "***", size = 6, color = "black") +
+  #geom_segment(aes(x = 2.2, xend = 6.2, y = 1, yend = 1), color = "black", size = .3)+
+  
+  #annotate("text", x = 3, y = .88, label = "***", size = 6, color = "black") +
+  #geom_segment(aes(x = 2.2, xend = 4.2, y = .88, yend = .88), color = "black", size = .3)+
+  
+  annotate("text", x = 5.7, y = .88, label = "***", size = 6, color = "black") +
+  geom_segment(aes(x = 5.2, xend = 6.2, y = .88, yend = .88), color = "black", size = .3)+
+  
+  #annotate("text", x = 5, y = .65, label = "***", size = 6, color = "black") +
+  #geom_segment(aes(x = 4.8, xend = 5.2, y = .65, yend = .65), color = "black", size = .3)+
+  
+  #annotate("text", x = 6, y = .83, label = "***", size = 6, color = "black") +
+  #geom_segment(aes(x = 5.8, xend = 6.2, y = .83, yend = .83), color = "black", size = .3)+
+  
+  annotate("text", x = 3.7, y = .83, label = "***", size = 6, color = "black") +
+  geom_segment(aes(x = 3.2, xend = 4.2, y = .83, yend = .83), color = "black", size = .3)+
+  
+  #annotate("text", x = 2.2, y = .75, label = "**", size = 6, color = "black") +
+  #geom_segment(aes(x = 1.2, xend = 3.2, y = .75, yend = .75), color = "black", size = .3)+
+  
+  
+  ylim(0, 1) +
+  scale_x_discrete(labels = function(x) gsub("\\.", " - ", x))  # Optional: formatting labels
+
+figure_accuracy_2
+```
+
+```{r}
+#just legit
+average_df_legit <- subset(average_df, !(type %in% c("scam")))
+
+figure_accuracy_2_legit <- ggplot(data = average_df_legit, aes(x = Study, y = accurate, fill = Time)) +
+  geom_bar(stat = "identity", position = position_dodge(), col = "black") +
+  guides(fill = guide_legend(reverse = FALSE)) +
+  labs(x = "Study", y = "Accuracy") +
+  theme(text = element_text(size = 16, family = "Times New Roman"), 
+        panel.background = element_rect(fill = 'transparent'), 
+        legend.direction = "horizontal", 
+        legend.position = c(0.6, 0.8), 
+        axis.line.x = element_line(color = "black", size = .3), 
+        axis.line.y = element_line(color = "black", size = .3), 
+        axis.ticks.x = element_blank()) +
+  scale_fill_manual(values = c("black", "white"), name = "") + 
+  theme_classic() +
+  
+  annotate("text", x = 2.2, y = .75, label = "**", size = 6, color = "black") +
+  geom_segment(aes(x = 1.2, xend = 3.2, y = .75, yend = .75), color = "black", size = .3)+
+  
+  annotate("text", x = 1.7, y = .7, label = "**", size = 6, color = "black") +
+  geom_segment(aes(x = 1.2, xend = 2.2, y = .7, yend = .7), color = "black", size = .3)+
+  
+  annotate("text", x = 3, y = .7, label = "***", size = 6, color = "black") +
+  geom_segment(aes(x = 2.8, xend = 3.2, y = .7, yend = .7), color = "black", size = .3)+
+  
+  annotate("text", x = 2, y = .65, label = "***", size = 6, color = "black") +
+  geom_segment(aes(x = 1.8, xend = 2.2, y = .65, yend = .65), color = "black", size = .3)+
+  
+  ylim(0, 1) +
+  scale_x_discrete(labels = function(x) gsub("\\.", " - ", x))  # Optional: formatting labels
+
+figure_accuracy_2_legit
+
+```
+
+```{r}
+#just scam
+average_df_scam <- subset(average_df, !(type %in% c("legit")))
+
+figure_accuracy_2_scam <- ggplot(data = average_df_scam, aes(x = Study, y = accurate, fill = Time)) +
+  geom_bar(stat = "identity", position = position_dodge(), col = "black") +
+  guides(fill = guide_legend(reverse = FALSE)) +
+  labs(x = "Study", y = "Accuracy") +
+  theme(text = element_text(size = 16, family = "Times New Roman"), 
+        panel.background = element_rect(fill = 'transparent'), 
+        legend.direction = "horizontal", 
+        legend.position = c(0.6, 0.8), 
+        axis.line.x = element_line(color = "black", size = .3), 
+        axis.line.y = element_line(color = "black", size = .3), 
+        axis.ticks.x = element_blank()) +
+  scale_fill_manual(values = c("black", "white"), name = "") + 
+  theme_classic() +
+  
+  annotate("text", x = 3, y = .85, label = "***", size = 6, color = "black") +
+  geom_segment(aes(x = 2.8, xend = 3.2, y = .85, yend = .85), color = "black", size = .3)+
+  
+  annotate("text", x = 1.7, y = .83, label = "***", size = 6, color = "black") +
+  geom_segment(aes(x = 1.2, xend = 2.2, y = .83, yend = .83), color = "black", size = .3)+
+  
+  annotate("text", x = 2, y = .9, label = "***", size = 6, color = "black") +
+  geom_segment(aes(x = 1.2, xend = 3.2, y = .9, yend = .9), color = "black", size = .3)+
+  
+  ylim(0, 1) +
+  scale_x_discrete(labels = function(x) gsub("\\.", " - ", x))  # Optional: formatting labels
+
+figure_accuracy_2_scam
+```
+
+
+```{r}
+correlation_all_fig <- ggplot(all_df, aes(x=confidence_scale_email.response, y=accurate)) +
+  geom_smooth(method=lm)+
+  labs(x = "Confidence Level", y = "Proportion Correct") +
+  theme(text=element_text(size=16,  family="Times New Roman"), panel.background = element_rect(fill='transparent'))+
+  #guides(color = guide_legend(reverse = TRUE, title = "Age")) +
+  #scale_color_manual(values = c("#0066CC", "#CC0066"))+
+  #scale_fill_manual(values = c("#0066CC", "#CC0066"))+
+#theme_classic() +  +
+  ylim(0,1)
+
+correlation_all_fig
+```
+```{r}
+correlation_all_fig <- ggplot(all_df, aes(x=curiosity_scale.response, y=accurate)) +
+  geom_smooth(method=lm)+
+  labs(x = "Curiosity", y = "Proportion Correct") +
+  theme(text=element_text(size=16,  family="Times New Roman"), panel.background = element_rect(fill='transparent'))+
+  #guides(color = guide_legend(reverse = TRUE, title = "Age")) +
+  #scale_color_manual(values = c("#0066CC", "#CC0066"))+
+  #scale_fill_manual(values = c("#0066CC", "#CC0066"))+
+#theme_classic() +  +
+  ylim(0,1)
+
+correlation_all_fig
+```
+
+```{r}
+res <- cor.test(all_df$confidence_scale_email.response, all_df$personal_rel_scale.response, 
+                    method = "pearson")
+res
+
+res_acc <- cor.test(all_df$accurate, all_df$personal_rel_scale.response, 
+                    method = "pearson")
+res_acc
+```
+
+```{r}
+res <- cor.test(all_df$confidence_scale_email.response, all_df$curiosity_scale.response, 
+                    method = "pearson")
+res
+
+res_acc <- cor.test(all_df$accurate, all_df$confidence_scale_email.response, 
+                    method = "pearson")
+res_acc
+```
+
+```{r}
+res <- cor.test(all_df$personal_rel_scale.response, all_df$curiosity_scale.response, 
+                    method = "pearson")
+res
+
+res_acc <- cor.test(all_df$accurate, all_df$curiosity_scale.response, 
+                    method = "pearson")
+res_acc
+```
+
+```{r}
+#make different agegroups
+
+all_data_o_age$Age_type <- " "
+all_data_age_type <- all_data_o_age %>%
+  mutate(
+    Age_type = case_when(
+      textboxAge.text <= 74  ~ "Youngest-Old",
+      textboxAge.text > 84  ~ "Oldest-Old",
+      TRUE ~ "Old-Old"
+    )
+  )
+
+df1_updated <- all_df %>%
+  select(-agegroup) %>%  # optional: drop old agegroup if present
+  left_join(all_data_age_type, by = "participant")
+
+df <- df1_updated %>%
+  mutate(Age_type = if_else(is.na(Age_type), "Younger", Age_type))
+```
+
+```{r}
+df$type <- as.factor(df$type)
+df$Time <- as.factor(df$Time)
+df$Study <- as.factor(df$Study)
+df$Age_type <- as.factor(df$Age_type)
+#write.csv(all_df, "all_df_SLSI.csv")
+#all_df$confidence_scale_email.response <- as.factor(all_df$confidence_scale_email.response)
+#all_df$personal_rel_scale.response <- as.factor(all_df$personal_rel_scale.response)
+#all_df$curiosity_scale.response <- as.factor(all_df$curiosity_scale.response)
+#all_df$participant <- as.factor(all_df$participant)
+#all_df$emails <- as.factor(all_df$emails)
+#accuracy
+accuracy_model <- glmer(accurate ~confidence_scale_email.response*type*Time*Study + personal_rel_scale.response*Age_type + Age_type  + (1 | participant) + (1 | emails), data = df, family = binomial)
+
+summary(accuracy_model)
+```
+```{r}
+extra_questions <- all_data_combined_all %>% select(participant, slider1_2.response, Phrases,Questions, key_resp_13.keys, key_resp_2.keys, dementia_question, rating.response, ss_question, slider1.response, slider.response)
+```
+
+```{r}
+# Define survey blocks and associated columns
+ survey_blocks <- list(
+ Dementia = c("demention_question", "rating.response"),
+ Generativity = c("Questions", "key_resp_13.keys"),
+ Loneliness = c("Questions", "key_resp_2.keys"),
+ Scam_Susceptibility = c("ss_question", "slider1.response"),
+ SocialSupport = c("Statements", "slider1_2.response"),
+ )
+```
+

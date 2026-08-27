@@ -27,7 +27,7 @@ from datetime import datetime
 # ── CONFIGURATION ─────────────────────────────────────────────────────────────
 WEBHOOK_URL = "https://mbaghdadi6g.app.n8n.cloud/webhook/fraud-check"   # paste your n8n test or production URL
 TIMEOUT_SECONDS = 60                    # max wait per request
-DELAY_BETWEEN_TESTS = 4.0              # seconds between requests (avoid rate limits)
+DELAY_BETWEEN_TESTS = 15.0              # seconds between requests (avoid rate limits)
 # ─────────────────────────────────────────────────────────────────────────────
 
 

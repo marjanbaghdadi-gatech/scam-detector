@@ -1,0 +1,1052 @@
+---
+  title: "SLSI Analysis"
+output: html_document
+date: "2025-04-28"
+---
+  
+```{r setup, include=FALSE}
+# This chunk sets up the R environment for the entire analysis.
+# It loads all necessary libraries.
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(ggplot2)
+library(plyr)
+library(lme4)
+library(lmerTest)
+library(dplyr)
+library(tidyverse)
+library(emmeans)
+```
+
+# Part 1: Data Ingestion and Cleaning
+
+```{r data-loading-and-cleaning}
+
+# Function to load, filter, and apply specific transformations to data from a folder
+process_data_folder <- function(config) {
+  path <- config$path
+  csv_files <- list.files(path, pattern = "\\.csv$", full.names = TRUE)
+  if (length(csv_files) == 0) return(tibble())
+
+  # Use a list to collect processed dataframes, which is safer for row-binding
+  all_data_list <- list()
+
+  # Loop through each file individually to handle potential inconsistencies
+  for (i in seq_along(csv_files)) {
+    file <- csv_files[i]
+    
+    header <- tryCatch(read_csv(file, n_max = 1, show_col_types = FALSE), error = function(e) NULL)
+    if (is.null(header) || !"Finish.timesOff" %in% names(header)) {
+      cat("Skipping file (missing Finish.timesOff):", basename(file), "\n")
+      next
+    }
+    
+    data <- tryCatch(read_csv(file, show_col_types = FALSE), error = function(e) NULL)
+    if (is.null(data)) {
+      cat("Skipping file (read error):", basename(file), "\n")
+      next
+    }
+
+    # FIX: Proactively coerce all potentially problematic ID and text columns to character
+    # to prevent type mismatches during the bind_rows operation.
+    cols_to_character <- c(
+      "participant", "bruinID.text", "textboxAge.text", "textboxAge_2.text",
+      "textboxBirthday.text", "textboxCountry.text", "textboxQuestion2.text",
+      "textboxQuestion3.text"
+    )
+    
+    for (col in cols_to_character) {
+      if (col %in% names(data)) {
+        data <- data %>% mutate(!!sym(col) := as.character(!!sym(col)))
+      }
+    }
+    
+    # Assign new participant IDs if required (for _O folders)
+    if (!is.null(config$assign_id) && config$assign_id) {
+      # This logic now correctly adds/overwrites a participant column, even if one doesn't exist
+      data$participant <- as.character(config$start_id + i)
+    }
+    
+    # Add the processed dataframe to our list
+    all_data_list[[i]] <- data
+  }
+
+  # Now, safely bind all consistent dataframes together
+  if (length(all_data_list) == 0) return(tibble())
+  df <- bind_rows(all_data_list)
+
+  # Exclude specified participants
+  if (length(config$exclude) > 0) {
+    df <- df %>% filter(!(participant %in% config$exclude))
+  }
+  
+  # Add Study and Age Group labels
+  df <- df %>% mutate(Study = config$study, agegroup = config$age)
+
+  return(df)
+}
+
+# Configuration list for all 12 data sources
+data_config <- list(
+  # Younger Groups
+  list(study = "Interactive", age = "Young", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSI3", exclude = c("880609", "027890", "062271", "154595", "398677", "444905", "507175", "594802", "646050", "664028", "742329", "898832", "956008", "958726", "412575", "865972", "891588", "926613", "958120", "965768", "983476", "989126", "999940")),
+  list(study = "Interactive", age = "Young", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSI4", exclude = c()),
+  list(study = "Control",     age = "Young", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSIC", exclude = c("195725", "321859", "491577")),
+  list(study = "Control",     age = "Young", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSIC2", exclude = c("196957", "518772", "698712")),
+  list(study = "Read",        age = "Young", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSINC", exclude = c("339398", "433190", "680443", "815593", "812787", "636451", "451605")),
+  list(study = "Read",        age = "Young", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSINC3", exclude = c("135211", "806070", "823722", "844981", "864718", "202658")),
+  # Older Groups
+  list(study = "Interactive", age = "Older", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSI_O", assign_id = TRUE, start_id = 100, exclude = c("121", "120", "119")),
+  list(study = "Interactive", age = "Older", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSI2_O", assign_id = TRUE, start_id = 200, exclude = c("209", "220")),
+  list(study = "Control",     age = "Older", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSIC_O", assign_id = TRUE, start_id = 300, exclude = c("320", "319")),
+  list(study = "Control",     age = "Older", path = "/Users/kyliealberts/Desktop/SLSI_data/SLSIC2_O", assign_id = TRUE, start_id = 400, exclude = c("416")),
+  list(study = "Read",        age = "Older", path = "/Users/kyliealberts/Desktop/slsi_data/SLSINC_O", assign_id = TRUE, start_id = 500, exclude = c("516", "501", "506")),
+  list(study = "Read",        age = "Older", path = "/Users/kyliealberts/Desktop/slsi_data/SLSINC2_O", assign_id = TRUE, start_id = 600, exclude = c("611", "614"))
+)
+
+# Process all folders and bind into a single dataframe
+all_data_combined_all <- map_dfr(data_config, process_data_folder)
+
+# Clean up helper objects
+rm(data_config, process_data_folder)
+```
+
+
+
+# Part 2: Feature Engineering
+
+```{r feature-engineering}
+
+# Function to tag experimental blocks (Pre/Post)
+tag_chunks <- function(df) {
+  df %>%
+    group_by(participant) %>%
+    mutate(
+      is_na_row = is.na(emails),
+      chunk = cumsum(lag(is_na_row, default = FALSE)) + 1
+    ) %>%
+    ungroup() %>%
+    select(-is_na_row)
+}
+
+# Create the final analysis dataframe 'all_df'
+all_df <- all_data_combined_all %>%
+  select(any_of(c("participant", "button_selections_1", "confidence_scale_email.response", 
+                  "personal_rel_scale.response", "curiosity_scale.response", "emails", 
+                  "type", "Study", "agegroup", "textboxAge.text"))) %>%
+  tag_chunks() %>%
+  rename(Time = chunk) %>%
+  mutate(
+    Time = case_when(
+      Time == 7  ~ "Pre",
+      Time %in% c(12, 15, 22) ~ "Post",
+      TRUE ~ NA_character_
+    ),
+    Response = if_else(str_detect(button_selections_1, "legit"), "legit", "scam")
+  ) %>%
+  # FIX: Replace aggressive na.omit() with a targeted filter.
+  # This keeps all trial rows, even if optional ratings are NA.
+  filter(!is.na(Time)) %>%
+  select(-button_selections_1) %>%
+  mutate(
+    accurate = if_else(type == Response, 1, 0),
+    SDT = case_when(
+      type == "scam"  & Response == "scam"  ~ "Hit",
+      type == "scam"  & Response == "legit" ~ "Miss",
+      type == "legit" & Response == "legit" ~ "Correct_R",
+      type == "legit" & Response == "scam"  ~ "False_A",
+      TRUE ~ NA_character_
+    )
+  )
+
+# Standardize (Z-score) continuous predictors for model stability
+all_df <- all_df %>%
+  mutate(
+    confidence_z = as.numeric(scale(confidence_scale_email.response)),
+    personal_rel_z = as.numeric(scale(personal_rel_scale.response)),
+    curiosity_z = as.numeric(scale(curiosity_scale.response))
+  )
+
+# Save the final, analysis-ready dataframe
+write.csv(all_df, "all_df_SLSI_for_analysis.csv", row.names = FALSE)
+
+# Clean up
+rm(tag_chunks)
+
+#the first confidence
+confidence_df <- all_data_combined_all %>%
+  select(any_of(c("confidence_scale.response", "participant")))
+
+confidence_df <- confidence_df %>% drop_na()
+
+all_df <- merge(all_df, confidence_df, by = "participant")
+
+
+#the agegroups
+
+age_df <- all_data_combined_all %>%
+  select(any_of(c("textboxAge.text", "participant")))
+
+age_df$Age_type <- " "
+age_df <- age_df %>%
+  mutate(
+    Age_type = case_when(
+      textboxAge.text < 50 ~ "Young",
+      textboxAge.text >= 50 & textboxAge.text <= 74 ~ "Youngest-Old",
+      textboxAge.text > 74 & textboxAge.text <= 84 ~ "Middle-Old",
+      textboxAge.text > 84 ~ "Oldest-Old",
+      TRUE ~ NA_character_
+    )
+  )
+
+age_df <- age_df %>% drop_na()
+
+all_df <- merge(all_df, age_df, by = "participant")
+
+```
+
+# Part 3: Statistical Modeling
+
+```{r statistical-modeling}
+
+# --- D-Prime Model ---
+# First, create the dprime summary dataframe
+dprime_df_counts <- all_df %>%
+  count(participant, Time, Study, agegroup, SDT) %>%  
+  pivot_wider(names_from = SDT, values_from = n, values_fill = 0)
+
+dprime <- function(Hit, Miss, False_A, Correct_R) {
+  hit_rate <- (Hit + 0.5) / (Hit + Miss + 1)
+  fa_rate  <- (False_A + 0.5) / (False_A + Correct_R + 1)
+  qnorm(hit_rate) - qnorm(fa_rate)
+}
+
+dprime_df <- dprime_df_counts %>%
+  rowwise() %>%
+  mutate(d_prime = dprime(
+    Hit = ifelse("Hit" %in% names(.), Hit, 0),
+    Miss = ifelse("Miss" %in% names(.), Miss, 0),
+    False_A = ifelse("False_A" %in% names(.), False_A, 0),
+    Correct_R = ifelse("Correct_R" %in% names(.), Correct_R, 0)
+  )) %>%
+  ungroup()
+
+c_criterion <- function(Hit, Miss, False_A, Correct_R) {
+  # Compute hit rate and false alarm rate with the 0.5 correction
+  hit_rate <- (Hit + 0.5) / (Hit + Miss + 1)
+  fa_rate  <- (False_A + 0.5) / (False_A + Correct_R + 1)
+  
+  # Compute z-scores
+  z_hit <- qnorm(hit_rate)
+  z_fa  <- qnorm(fa_rate)
+  
+  # Compute c criterion
+  c <- -0.5 * (z_hit + z_fa)
+  return(c)
+}
+
+# Apply row-wise to your dataframe
+c_criterion_df <- dprime_df_counts %>%
+  rowwise() %>%
+  mutate(c_criterion = c_criterion(
+    Hit = ifelse("Hit" %in% names(.), Hit, 0),
+    Miss = ifelse("Miss" %in% names(.), Miss, 0),
+    False_A = ifelse("False_A" %in% names(.), False_A, 0),
+    Correct_R = ifelse("Correct_R" %in% names(.), Correct_R, 0)
+  )) %>%
+  ungroup()
+
+load("/Users/kyliealberts/SLSI/scales_scored.RData")
+ss_df <- scales_scored %>% select(c("participant", "total_ss_answer"))
+
+ss_df <- unique(ss_df)
+
+dprime_df <- merge(dprime_df, ss_df, by = "participant")
+
+write.csv(dprime_df, "dprime_df.csv")
+
+dprime_df$Study <- as.factor(dprime_df$Study)
+dprime_df$Time <- as.factor(dprime_df$Time)
+dprime_df$agegroup <- as.factor(dprime_df$agegroup)
+model_dprime <- lmer(d_prime ~ Study*Time*agegroup + (1 | participant), data = dprime_df)
+print("--- D-Prime Model Summary ---")
+summary(model_dprime)
+```
+```{r}
+write.csv(c_criterion_df, "criterion_c.csv")
+c_criterion_df$Study <- as.factor(c_criterion_df$Study)
+c_criterion_df$Time <- as.factor(c_criterion_df$Time)
+c_criterion_df$agegroup <- as.factor(c_criterion_df$agegroup)
+model_c_criterion_df <- lmer(c_criterion ~ Study*Time*agegroup + (1 | participant), data = c_criterion_df)
+
+summary(model_c_criterion_df)
+```
+```{r}
+emmeans_pairwise_d_study <- emmeans(model_c_criterion_df, ~ Study)
+pairs(emmeans_pairwise_d_study)
+```
+```{r}
+emmeans_pairwise_d_study_time <- emmeans(model_c_criterion_df, ~ Study*Time)
+pairs(emmeans_pairwise_d_study_time)
+```
+
+
+
+```{r}
+stand_c <- data.frame(
+  Study=c("Control", "Control", "Control", "Control", "Read", "Read", "Read", "Read", "Interactive", "Interactive", "Interactive", "Interactive"),
+Time = c("Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post"),
+  agegroup = c("Young", "Older","Young", "Older","Young", "Older","Young", "Older", "Young", "Older", "Young", "Older"),
+  sd=c(.0791, .102, .0983, .103, .0631, .0859, .0818, .113, .0948, .0858, .101, .0854)
+)
+
+average_c_criterion_df_all <- c_criterion_df %>% 
+  group_by(agegroup, Study, Time) %>% summarise_at(vars(c_criterion), list(c_criterion = mean))
+
+average_c_criterion_df_all$Time <- factor(average_c_criterion_df_all$Time, levels = c("Pre", "Post"))
+average_c_criterion_df_all$Study <- factor(average_c_criterion_df_all$Study, levels = c("Control", "Read", "Interactive"))
+average_c_criterion_df_all$agegroup <- factor(average_c_criterion_df_all$agegroup, levels = c("Young", "Older"))
+
+average_c_criterion_df_all <- merge(average_c_criterion_df_all, stand_c, by=c("Study", "agegroup", "Time"))
+
+figure_average_c_criterion_df_all <- ggplot(data=average_c_criterion_df_all, aes(x=agegroup, y=c_criterion, fill=Time)) +
+geom_bar(stat="identity", position=position_dodge(), col = "black")+
+  facet_wrap(~Study)+
+  scale_fill_manual(values=c("white", "black"))+
+   guides(fill = guide_legend(reverse = FALSE, direction = "horizontal")) +
+  labs(x = " ", y = "Criterion C") +
+  theme_classic(base_family = "Times New Roman") +
+  theme(
+    text = element_text(size=16), 
+    panel.background = element_rect(fill='transparent'),
+    legend.position = c(0.3, 0.15),   # inside top-right corner of panel
+    legend.justification = c(1, 1), # anchor legend by its top-right corner
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.key = element_blank(),
+    legend.title = element_blank(),
+    axis.line.x = element_line(color="black", size = .3),
+    axis.line.y = element_line(color="black", size = .3), 
+    axis.ticks.x = element_blank()
+  ) +geom_errorbar(aes(ymin=c_criterion-sd, ymax=c_criterion+sd), width=0.2, colour="gray27", position=position_dodge(.9)) 
+  #ylim(0,1) 
+
+figure_average_c_criterion_df_all
+```
+
+
+```{r}
+stand_dprime <- data.frame(
+  Study=c("Control", "Control", "Control", "Control", "Read", "Read", "Read", "Read", "Interactive", "Interactive", "Interactive", "Interactive"),
+Time = c("Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post"),
+  agegroup = c("Young", "Older","Young", "Older","Young", "Older","Young", "Older", "Young", "Older", "Young", "Older"),
+  sd=c(.0929, .109, .102, .111, .0924, .123, .108, .141, .0980, .131, .104, .105)
+)
+
+average_dprime_all <- dprime_df %>% 
+  group_by(agegroup, Study, Time) %>% summarise_at(vars(d_prime), list(d_prime = mean))
+
+average_dprime_all$Time <- factor(average_dprime_all$Time, levels = c("Pre", "Post"))
+average_dprime_all$Study <- factor(average_dprime_all$Study, levels = c("Control", "Read", "Interactive"))
+average_dprime_all$agegroup <- factor(average_dprime_all$agegroup, levels = c("Young", "Older"))
+
+average_dprime_all <- merge(average_dprime_all, stand_dprime, by=c("Study", "agegroup", "Time"))
+
+figure_average_dprime_all <- ggplot(data=average_dprime_all, aes(x=agegroup, y=d_prime, fill=Time)) +
+geom_bar(stat="identity", position=position_dodge(), col = "black")+
+  facet_wrap(~Study)+
+  scale_fill_manual(values=c("white", "black"))+
+   guides(fill = guide_legend(reverse = FALSE, direction = "horizontal")) +
+  labs(x = " ", y = "d'") +
+  theme_classic(base_family = "Times New Roman") +
+  theme(
+    text = element_text(size=16), 
+    panel.background = element_rect(fill='transparent'),
+    legend.position = c(0.95, 0.99),   # inside top-right corner of panel
+    legend.justification = c(1, 1), # anchor legend by its top-right corner
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.key = element_blank(),
+    legend.title = element_blank(),
+    axis.line.x = element_line(color="black", size = .3),
+    axis.line.y = element_line(color="black", size = .3), 
+    axis.ticks.x = element_blank()
+  ) +geom_errorbar(aes(ymin=d_prime-sd, ymax=d_prime+sd), width=0.2, colour="gray27", position=position_dodge(.9)) 
+  #ylim(0,1) 
+
+figure_average_dprime_all
+```
+```{r}
+stand_acc <- data.frame(
+  Study=c("Control", "Control", "Control", "Control", "Read", "Read", "Read", "Read", "Interactive", "Interactive", "Interactive", "Interactive"),
+Time = c("Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post"),
+  type = c("Scam", "Legit","Scam", "Legit","Scam", "Legit","Scam", "Legit", "Scam", "Legit", "Scam", "Legit"),
+  sd=c(.0226, .0229, .0233, .0230, .0213, .0238, .0198, .0241, .0225, .0238, .0202, .0244)
+)
+df_hit_fa <- all_df %>% select(c("participant", "Study", "agegroup", "Time", "type", "SDT"))
+
+df_hit_fa <- df_hit_fa %>%
+  mutate(prob = if_else(SDT %in% c("Hit", "False_A"), 1, 0))
+
+write.csv(df_hit_fa, "df_hit_fa.csv")
+
+average_df_hit_fa <- df_hit_fa %>% 
+  group_by(agegroup, Study, Time, type) %>% summarise_at(vars(prob), list(prob = mean))
+
+average_df_hit_fa$Time <- factor(average_df_hit_fa$Time, levels = c("Pre", "Post"))
+average_df_hit_fa$Study <- factor(average_df_hit_fa$Study, levels = c("Control", "Read", "Interactive"))
+average_df_hit_fa$agegroup <- factor(average_df_hit_fa$agegroup, levels = c("Young", "Older"))
+
+average_df_hit_fa <- subset(average_df_hit_fa, (agegroup == "Young"))
+
+average_df_hit_fa <- average_df_hit_fa %>%
+  mutate(type = as.character(type),
+         type = ifelse(type == "legit", "Legit", type))
+
+average_df_hit_fa <- average_df_hit_fa %>%
+  mutate(type = as.character(type),
+         type = ifelse(type == "scam", "Scam", type))
+
+average_df_hit_fa <- merge(average_df_hit_fa, stand_acc, by=c("Study", "type", "Time"))
+
+figure_average_df_hit_fa <- ggplot(data=average_df_hit_fa, aes(x=type, y=prob, fill=Time)) +
+geom_bar(stat="identity", position=position_dodge(), col = "black")+
+  facet_wrap(~Study)+
+  scale_fill_manual(values=c("white", "black"))+
+   guides(fill = guide_legend(reverse = FALSE, direction = "horizontal")) +
+  labs(x = " ", y = "Probability of Responding 'Scam'") +
+  theme_classic(base_family = "Times New Roman") +
+  theme(
+    text = element_text(size=16), 
+    panel.background = element_rect(fill='transparent'),
+    legend.position = c(0.95, 0.99),   # inside top-right corner of panel
+    legend.justification = c(1, 1), # anchor legend by its top-right corner
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.key = element_blank(),
+    legend.title = element_blank(),
+    axis.line.x = element_line(color="black", size = .3),
+    axis.line.y = element_line(color="black", size = .3), 
+    axis.ticks.x = element_blank() 
+  ) +geom_errorbar(aes(ymin=prob-sd, ymax=prob+sd), width=0.2, colour="gray27", position=position_dodge(.9)) +
+  ylim(0,1) 
+
+figure_average_df_hit_fa
+```
+
+
+```{r}
+stand_acc <- data.frame(
+  Study=c("Control", "Control", "Control", "Control", "Read", "Read", "Read", "Read", "Interactive", "Interactive", "Interactive", "Interactive"),
+Time = c("Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post"),
+  type = c("Scam", "Legit","Scam", "Legit","Scam", "Legit","Scam", "Legit", "Scam", "Legit", "Scam", "Legit"),
+  sd=c(.0219, .0233, .0224, .0236, .0215, .0237, .0193, .0241, .0221, .0237, .0202, .0239)
+)
+df_hit_fa <- all_df %>% select(c("participant", "Study", "agegroup", "Time", "type", "SDT"))
+
+df_hit_fa <- df_hit_fa %>%
+  mutate(prob = if_else(SDT %in% c("Hit", "False_A"), 1, 0))
+
+average_df_hit_fa <- df_hit_fa %>% 
+  group_by(agegroup, Study, Time, type) %>% summarise_at(vars(prob), list(prob = mean))
+
+average_df_hit_fa$Time <- factor(average_df_hit_fa$Time, levels = c("Pre", "Post"))
+average_df_hit_fa$Study <- factor(average_df_hit_fa$Study, levels = c("Control", "Read", "Interactive"))
+average_df_hit_fa$agegroup <- factor(average_df_hit_fa$agegroup, levels = c("Young", "Older"))
+
+average_df_hit_fa <- subset(average_df_hit_fa, (agegroup == "Older"))
+
+average_df_hit_fa <- average_df_hit_fa %>%
+  mutate(type = as.character(type),
+         type = ifelse(type == "legit", "Legit", type))
+
+average_df_hit_fa <- average_df_hit_fa %>%
+  mutate(type = as.character(type),
+         type = ifelse(type == "scam", "Scam", type))
+
+average_df_hit_fa <- merge(average_df_hit_fa, stand_acc, by=c("Study", "type", "Time"))
+
+figure_average_df_hit_fa <- ggplot(data=average_df_hit_fa, aes(x=type, y=prob, fill=Time)) +
+geom_bar(stat="identity", position=position_dodge(), col = "black")+
+  facet_wrap(~Study)+
+  scale_fill_manual(values=c("white", "black"))+
+   guides(fill = guide_legend(reverse = FALSE, direction = "horizontal")) +
+  labs(x = " ", y = "Probability of Responding 'Scam'") +
+  theme_classic(base_family = "Times New Roman") +
+  theme(
+    text = element_text(size=16), 
+    panel.background = element_rect(fill='transparent'),
+    legend.position = c(0.95, 0.99),   # inside top-right corner of panel
+    legend.justification = c(1, 1), # anchor legend by its top-right corner
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.key = element_blank(),
+    legend.title = element_blank(),
+    axis.line.x = element_line(color="black", size = .3),
+    axis.line.y = element_line(color="black", size = .3), 
+    axis.ticks.x = element_blank() 
+  ) +geom_errorbar(aes(ymin=prob-sd, ymax=prob+sd), width=0.2, colour="gray27", position=position_dodge(.9)) +
+  ylim(0,1) 
+
+figure_average_df_hit_fa
+```
+
+
+```{r}
+#a prime model
+aprime <- function(Hit, Miss, False_A, Correct_R) {
+  hit_rate <- (Hit + 0.5) / (Hit + Miss + 1)
+  fa_rate  <- (False_A + 0.5) / (False_A + Correct_R + 1)
+  
+  # A-prime formula
+  0.5 + ((hit_rate - fa_rate) * (1 + hit_rate - fa_rate)) / 
+    (4 * hit_rate * (1 - fa_rate))
+}
+
+# Apply across rows
+aprime_df <- dprime_df_counts %>%
+  rowwise() %>%
+  mutate(a_prime = aprime(
+    Hit = ifelse("Hit" %in% names(.), Hit, 0),
+    Miss = ifelse("Miss" %in% names(.), Miss, 0),
+    False_A = ifelse("False_A" %in% names(.), False_A, 0),
+    Correct_R = ifelse("Correct_R" %in% names(.), Correct_R, 0)
+  )) %>%
+  ungroup()
+
+b_double_prime <- function(Hit, Miss, False_A, Correct_R) {
+  hit_rate <- (Hit + 0.5) / (Hit + Miss + 1)
+  fa_rate  <- (False_A + 0.5) / (False_A + Correct_R + 1)
+  
+  (hit_rate * (1 - hit_rate) - fa_rate * (1 - fa_rate)) /
+    (hit_rate * (1 - hit_rate) + fa_rate * (1 - fa_rate))
+}
+
+b_double_prime <- dprime_df_counts %>%
+  rowwise() %>%
+  mutate(b_double_prime = b_double_prime(
+    Hit = ifelse("Hit" %in% names(.), Hit, 0),
+    Miss = ifelse("Miss" %in% names(.), Miss, 0),
+    False_A = ifelse("False_A" %in% names(.), False_A, 0),
+    Correct_R = ifelse("Correct_R" %in% names(.), Correct_R, 0)
+  )) %>%
+  ungroup()
+
+
+aprime_df <- merge(aprime_df, ss_df, by = "participant")
+
+write.csv(aprime_df, "aprime_df.csv")
+
+
+aprime_df$Study <- as.factor(aprime_df$Study)
+aprime_df$Time <- as.factor(aprime_df$Time)
+aprime_df$agegroup <- as.factor(aprime_df$agegroup)
+model_aprime <- lmer(a_prime ~ Study*Time*agegroup + total_ss_answer + (1 | participant), data = aprime_df)
+print("--- A-Prime Model Summary ---")
+summary(model_aprime)
+```
+
+```{r}
+bprime_summary <- b_double_prime %>%
+  group_by(agegroup, Time, Study) %>%
+  summarise(
+    mean_b = mean(b_double_prime, na.rm = TRUE),
+    sd_b = sd(b_double_prime, na.rm = TRUE)
+  )
+print(bprime_summary)
+
+ggplot(b_double_prime, aes(x = agegroup, y = b_double_prime, fill = Time)) +
+  facet_wrap(~Study)+
+  geom_boxplot(alpha = 0.6) +
+  geom_jitter(width = 0.1, alpha = 0.5) +
+  labs(title = "Response bias (B″) by group", y = "B″ (B double-prime)", x = "")
+
+```
+```{r}
+model_b <- lmer(b_double_prime ~ Study*Time*agegroup + (1 | participant), data = b_double_prime)
+
+summary(model_b)
+```
+
+
+
+```{r}
+# stand_aprime <- data.frame(
+#   Study=c("Control", "Control", "Control", "Control", "Read", "Read", "Read", "Read", "Interactive", "Interactive", "Interactive", "Interactive"),
+# agegroup = c("Young", "Young", "Older", "Older", "Young", "Young", "Older", "Older", "Young", "Young", "Older", "Older"),
+#   Time = c("Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post", "Pre", "Pre", "Post", "Post"),
+#   sd=c(.0244, .0231, .0246, .0241, .0248, .0226, .0253, .0211, .0246, .0232, .0251, .0179)
+# )
+
+average_aprime_all <- aprime_df %>% 
+  group_by(agegroup, Study, Time) %>% summarise_at(vars(a_prime), list(a_prime = mean))
+
+average_aprime_all$Time <- factor(average_aprime_all$Time, levels = c("Pre", "Post"))
+average_aprime_all$Study <- factor(average_aprime_all$Study, levels = c("Control", "Read", "Interactive"))
+average_aprime_all$agegroup <- factor(average_aprime_all$agegroup, levels = c("Young", "Older"))
+
+#average_aprime_all <- merge(average_aprime_all, stand_aprime, by=c("Study", "agegroup", "Time"))
+
+figure_average_aprime_all <- ggplot(data=average_aprime_all, aes(x=agegroup, y=a_prime, fill=Time)) +
+geom_bar(stat="identity", position=position_dodge(), col = "black")+
+  facet_wrap(~Study)+
+  scale_fill_manual(values=c("white", "black"))+
+   guides(fill = guide_legend(reverse = FALSE, direction = "horizontal")) +
+  labs(x = " ", y = "Accuracy") +
+  theme_classic(base_family = "Times New Roman") +
+  theme(
+    text = element_text(size=16), 
+    panel.background = element_rect(fill='transparent'),
+    legend.position = c(0.95, 0.95),   # inside top-right corner of panel
+    legend.justification = c(1, 1), # anchor legend by its top-right corner
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.key = element_blank(),
+    legend.title = element_blank(),
+    axis.line.x = element_line(color="black", size = .3),
+    axis.line.y = element_line(color="black", size = .3), 
+    axis.ticks.x = element_blank()
+  ) +   ylim(0,1) #+
+  #geom_errorbar(aes(ymin=a_prime-sd, ymax=a_prime+sd), width=0.2, colour="gray27", position=position_dodge(.9)) 
+  #ylim(0,1) 
+
+figure_average_aprime_all
+```
+
+```{r}
+all_df <- all_df %>% select(-textboxAge.text.x)
+
+df_clean <- na.omit(all_df)
+
+average_df <- df_clean %>% 
+  group_by(agegroup, Time, Study) %>% summarise_at(vars(accurate), list(accurate = mean))
+
+merged_df <- average_df %>%
+  left_join(bprime_summary, by = c("agegroup", "Time", "Study"))
+
+merged_df <- merged_df %>%
+  left_join(average_aprime_all, by = c("agegroup", "Time", "Study"))
+```
+
+
+```{r accuracy-model}
+# Convert all categorical variables to factors for modeling
+all_df <- all_df %>%
+  mutate(across(c(type, Time, Study, agegroup, participant, emails), as.factor))
+
+#scales_scored <- read.csv("/Users/kyliealberts/SLSI/scales_scored.csv")
+load("/Users/kyliealberts/SLSI/scales_scored.RData")
+
+ss_df <- scales_scored %>% select(c("participant", "total_ss_answer"))
+
+ss_df <- unique(ss_df)
+
+all_df <- merge(all_df, ss_df, by = "participant")
+
+
+
+all_df <- all_df %>% drop_na()
+
+# lon_df <- scales_scored %>% select(c("participant", "total_lon_answer"))
+# 
+# lon_df <- unique(lon_df)
+# 
+# all_df <- merge(all_df, lon_df, by = "participant")
+# 
+# gen_df <- scales_scored %>% select(c("participant", "total_gen_answer"))
+# 
+# gen_df <- unique(gen_df)
+# 
+# all_df <- merge(all_df, gen_df, by = "participant")
+# 
+# 
+# 
+# email_cat <- scales_scored %>% select(c("participant", "emails", "email_cat"))
+# 
+# all_df <- merge(all_df, email_cat, by = c("participant", "emails"))
+
+# # Model 1: Two-Way Interactions Only (Most Robust)
+# accuracy_model_2_way <- glmer(
+#   accurate ~ (confidence_z + type + Time + Study)^2 + 
+#     personal_rel_z * agegroup + 
+#     (1 | participant) + (1 | emails),
+#   data = all_df,
+#   family = binomial,
+#   control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+# )
+# print("--- Accuracy Model (2-Way Interactions) Summary ---")
+# summary(accuracy_model_2_way)
+# 
+# # Model 2: With Key Three-Way Interaction (Theoretically Driven)
+# accuracy_model_3_way <- glmer(
+#   accurate ~ Time * Study * type + 
+#     confidence_z:type + 
+#     personal_rel_z * agegroup + 
+#     (1 | participant) + (1 | emails),
+#   data = all_df,
+#   family = binomial,
+#   control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+# )
+# print("--- Accuracy Model (3-Way Interaction) Summary ---")
+# summary(accuracy_model_3_way)
+# 
+# # Clean up
+# rm(dprime_df_counts, dprime)
+
+
+
+#part two
+#  accuracy_model_3_way2 <- glmer(
+#    accurate ~ Time * Study * type * agegroup+
+#      curiosity_z+
+#     personal_rel_z+
+#      (1 | participant) + (1 | emails),
+#    data = all_df,
+#    family = binomial,
+#    control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+#  )
+# 
+# 
+# summary(accuracy_model_3_way2)
+
+all_df <- all_df %>%
+  mutate(
+    scam_sus_z = as.numeric(scale(total_ss_answer))
+  )
+
+#sig
+accuracy_model_3_way2 <- glmer(
+  accurate ~ Time * Study * type * agegroup+
+    curiosity_z+
+    personal_rel_z+
+    scam_sus_z +
+    (1 | participant) + (1 | emails),
+  data = all_df,
+  family = binomial,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+)
+
+summary(accuracy_model_3_way2)
+
+# accuracy_model_3_way2 <- glmer(
+#   accurate ~ Time * Study * type * agegroup+
+#     curiosity_z*scam_sus_z+
+#     personal_rel_z+
+#     #scam_sus_z +
+#     (1 | participant) + (1 | emails),
+#   data = all_df,
+#   family = binomial,
+#   control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+# )
+# 
+# summary(accuracy_model_3_way2)
+# 
+write.csv(all_df, "all_df_slsi.csv")
+
+cor.test(all_df$curiosity_z, all_df$scam_sus_z)
+
+# accuracy_model_4 <- glmer(
+#   accurate ~ Time * Study * type * Age_type+
+#     curiosity_z+
+#     personal_rel_z+
+#     total_ss_answer +
+#     (1 | participant) + (1 | emails),
+#   data = all_df,
+#   family = binomial,
+#   control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+# )
+# 
+# summary(accuracy_model_4)
+# #
+# anova(accuracy_model_3_way2, accuracy_model_4)
+
+
+#anova(accuracy_model_3_way2, accuracy_model_test)
+# no sig
+# accuracy_model_test2 <- glmer(
+#   accurate ~ Time * Study * type * agegroup+
+#     curiosity_z+
+#     personal_rel_z+
+#     total_ss_answer +
+#     confidence_scale.response +
+#     (1 | participant) + (1 | emails),
+#   data = all_df,
+#   family = binomial,
+#   control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+# )
+# 
+# 
+# anova(accuracy_model_3_way2, accuracy_model_test2)
+# 
+# summary(accuracy_model_test2)
+
+#not sig
+# accuracy_model_test3 <- glmer(
+#   accurate ~ Time * Study * type * agegroup+
+#     curiosity_z+
+#     personal_rel_z+
+#     total_ss_answer+
+#     total_lon_answer +
+#     (1 | participant) + (1 | emails),
+#   data = all_df,
+#   family = binomial,
+#   control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+# )
+# 
+# 
+# anova(accuracy_model_3_way2, accuracy_model_test3)
+
+#sig
+# accuracy_model_test4 <- glmer(
+#   accurate ~ Time * Study * type * Age_type+
+#     curiosity_z+
+#     personal_rel_z+
+#     total_ss_answer +
+#     (1 | participant) + (1 | emails),
+#   data = all_df,
+#   family = binomial,
+#   control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+# )
+# 
+# anova(accuracy_model_3_way2, accuracy_model_test4)
+
+# Clean up
+rm(dprime_df_counts, dprime)
+```
+
+# Part 4: Post-Hoc Analysis
+
+```{r post-hoc-analysis}
+
+#probing the last model 
+
+emmeans_pairwise_acc_age <- emmeans(accuracy_model_3_way2, ~ agegroup)
+pairs(emmeans_pairwise_acc_age)
+
+emmeans_pairwise_acc_study <- emmeans(accuracy_model_3_way2, ~ Study)
+pairs(emmeans_pairwise_acc_study)
+```
+```{r}
+emmeans_pairwise_acc_study_time <- emmeans(accuracy_model_3_way2, ~ Time*Study)
+pairs(emmeans_pairwise_acc_study_time)
+```
+```{r}
+emmeans_pairwise_acc_study_type <- emmeans(accuracy_model_3_way2, ~ Study*type)
+pairs(emmeans_pairwise_acc_study_type)
+```
+```{r}
+emmeans_pairwise_acc_study_type <- emmeans(accuracy_model_3_way2, ~ agegroup*type)
+pairs(emmeans_pairwise_acc_study_type)
+```
+
+
+
+```{r}
+emmeans_pairwise_acc_study_type_time <- emmeans(accuracy_model_3_way2, ~ Study*type*Time)
+pairs(emmeans_pairwise_acc_study_type_time)
+```
+
+```{r}
+emmeans_pairwise_acc_study_type_age <- emmeans(accuracy_model_3_way2, ~ Study*type*agegroup)
+pairs(emmeans_pairwise_acc_study_type_age)
+```
+
+```{r}
+emmeans_pairwise_acc_study_type_age <- emmeans(accuracy_model_3_way2, ~ Study*type*agegroup*Time)
+all_pairs <- pairs(emmeans_pairwise_acc_study_type_age)
+options(scipen = 999)
+pairs_df <- as.data.frame(all_pairs)
+
+write.csv(pairs_df, "pairs_df.csv")
+```
+
+
+
+
+# Part 5: Visualization
+
+```{r visualization}
+# --- Confidence vs. Accuracy Scatter Plots ---
+average_confidence_accuracy <- all_df %>%
+  group_by(participant, Study, type) %>%
+  summarize(
+    mean_accuracy = mean(accurate, na.rm = TRUE),
+    mean_confidence = mean(confidence_scale_email.response, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+figure_accuracy_con_legit <- ggplot(
+  subset(average_confidence_accuracy, type == "legit"), 
+  aes(x = mean_accuracy, y = mean_confidence, color = Study)) +
+  geom_point(alpha = 0.6) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Accuracy", y = "Confidence", title = "Legit Emails: Confidence vs. Accuracy") +
+  theme_classic()
+print(figure_accuracy_con_legit)
+
+figure_accuracy_con_scam <- ggplot(
+  subset(average_confidence_accuracy, type == "scam"), 
+  aes(x = mean_accuracy, y = mean_confidence, color = Study)) +
+  geom_point(alpha = 0.6) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Accuracy", y = "Confidence", title = "Scam Emails: Confidence vs. Accuracy") +
+  theme_classic()
+print(figure_accuracy_con_scam)
+
+
+# --- Bar Chart of Accuracy ---
+average_df <- all_df %>% 
+  group_by(type, Time, Study) %>% 
+  summarise(accurate = mean(accurate), .groups = "drop")
+
+figure_accuracy <- ggplot(average_df, aes(x = type, y = accurate, fill = Time)) +
+  geom_bar(stat="identity", position=position_dodge(), col = "black") +
+  facet_wrap(~Study) +
+  labs(x = "Email Type", y = "Mean Accuracy", title = "Accuracy by Email Type, Time, and Study") +
+  theme_classic() +
+  ylim(0, 1)
+print(figure_accuracy)
+
+# Clean up
+rm(average_confidence_accuracy, average_df, figure_accuracy_con_legit, figure_accuracy_con_scam, figure_accuracy)
+
+```
+```{r}
+
+write.csv(all_df, "all_df_SLSI.csv")
+library(lme4)
+confidence_model <- lmer(
+  confidence_scale_email.response ~ Time * Study * type * agegroup +
+    (1 | participant) + (1 | emails),
+  data = all_df,
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+)
+
+summary(confidence_model)
+
+
+```
+
+```{r}
+emmeans_confidence_study <- emmeans(confidence_model, ~ Study)
+pairs(emmeans_confidence_study)
+```
+```{r}
+emmeans_confidence_type <- emmeans(confidence_model, ~ type)
+pairs(emmeans_confidence_type)
+```
+
+
+```{r}
+emmeans_confidence_age <- emmeans(confidence_model, ~ agegroup)
+pairs(emmeans_confidence_age)
+```
+
+```{r}
+emmeans_confidence_study_time <- emmeans(confidence_model, ~ Study*Time)
+pairs(emmeans_confidence_study_time)
+```
+
+```{r}
+emmeans_confidence_type_age <- emmeans(confidence_model, ~ type*agegroup)
+pairs(emmeans_confidence_type_age)
+```
+```{r}
+emmeans_confidence_study_type_agegroup <- emmeans(confidence_model, ~ Study*type*agegroup)
+pairs(emmeans_confidence_study_type_agegroup)
+```
+
+```{r}
+emmeans_confidence_study_time_type_Age <- emmeans(confidence_model, ~ Study*Time*type*agegroup)
+conf_pairs <- pairs(emmeans_confidence_study_time_type_Age)
+options(scipen = 999)
+conf_df <- as.data.frame(conf_pairs)
+
+write.csv(conf_df, "conf_df.csv")
+```
+
+```{r}
+correlation_all_fig <- ggplot(all_df, aes(x = total_ss_answer, y = accurate)) +
+  geom_smooth(method = lm) +
+  labs(x = "Scam Susceptibility Scale", y = "Proportion Correct") +
+  theme_minimal()+
+  theme(
+    text = element_text(size = 16, family = "Times New Roman"),
+    panel.background = element_rect(fill = 'transparent')
+  ) +
+  ylim(0, 1)
+
+
+correlation_all_fig
+```
+
+```{r}
+accuracy_model_3_way2 <- glmer(
+  accurate ~ Time * Study * type * agegroup*confidence_z+
+    (1 | participant) + (1 | emails),
+  data = all_df,
+  family = binomial,
+  control = glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))
+)
+
+summary(accuracy_model_3_way2)
+
+```
+
+```{r}
+emmeans_confidence_acc <- emmeans(accuracy_model_3_way2, ~ Study*confidence_z)
+pairs(emmeans_confidence_acc)
+```
+```{r}
+trend <- emtrends(accuracy_model_3_way2, ~ Study, var = "confidence_z")
+summary(trend)
+pairs(trend)
+```
+
+
+```{r}
+emmeans_confidence_acc <- emmeans(accuracy_model_3_way2, ~ Study*confidence_z*Time)
+pairs(emmeans_confidence_acc)
+```
+```{r}
+trend <- emtrends(accuracy_model_3_way2, ~ Study*Time, var = "confidence_z")
+summary(trend)
+pairs(trend, by = "Study")
+pairs(trend, by = "Time")
+```
+```{r}
+emmeans_confidence_acc <- emmeans(accuracy_model_3_way2, ~ Study*confidence_z*type)
+pairs(emmeans_confidence_acc)
+```
+
+```{r}
+trend <- emtrends(accuracy_model_3_way2, ~ Study*type, var = "confidence_z")
+summary(trend)
+pairs(trend, by = "Study")
+pairs(trend, by = "type")
+```
+```{r}
+emmeans_confidence_acc <- emmeans(accuracy_model_3_way2, ~ agegroup*confidence_z*type)
+pairs(emmeans_confidence_acc)
+```
+```{r}
+trend <- emtrends(accuracy_model_3_way2, ~ agegroup*type, var = "confidence_z")
+summary(trend)
+pairs(trend, by = "agegroup")
+pairs(trend, by = "type")
+```
+
+```{r}
+emmeans_confidence_acc <- emmeans(accuracy_model_3_way2, ~ Time*Study*confidence_z*type)
+acc_conf_pairs <- pairs(emmeans_confidence_acc)
+
+options(scipen = 999)
+acc_conf_df <- as.data.frame(acc_conf_pairs)
+
+write.csv(acc_conf_df, "acc_conf_df.csv")
+
+```
+
+```{r}
+trend <- emtrends(accuracy_model_3_way2, ~ Time*Study*type, var = "confidence_z")
+summary(trend)
+pairs(trend, by = "Time")
+pairs(trend, by = "type")
+pairs(trend, by = "Study")
+```
+
+
