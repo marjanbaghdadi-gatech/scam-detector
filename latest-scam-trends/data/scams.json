@@ -1,82 +1,82 @@
 [
   {
-    "title": "Medicare Scam Calls Threaten to Cancel Coverage",
+    "title": "Medicare Card Phone Scam",
     "category": "phone_scam",
     "date_reported": "June 2024",
     "source": "AARP",
-    "how_it_works": "Scammers call pretending to be from Medicare. They say your coverage will be canceled unless you give them personal information or pay a fee. They may use official-sounding language to scare you.",
-    "example_message": "\"This is Medicare. Your coverage will be canceled unless you confirm your Social Security number and bank information right now.\"",
+    "how_it_works": "Scammers call pretending to be from Medicare, saying you need a new card or that your benefits are at risk. They ask for your Medicare number or other personal information.",
+    "example_message": "\"Hello, this is Medicare. We need to send you a new card. Can you please confirm your Medicare number and date of birth?\"",
     "red_flags": [
-      "Caller says your coverage will be canceled immediately",
-      "They ask for your Social Security or bank info",
-      "Pressure to act right away"
+      "Unsolicited call about your Medicare card",
+      "Pressure to give personal information",
+      "Threats that your benefits will end"
     ],
-    "what_to_do": "Hang up and call Medicare directly at 1-800-MEDICARE if you have questions.",
-    "id": "scam_1786957271378_0",
-    "updated_at": "2026-08-17T09:01:11.378Z"
+    "what_to_do": "Hang up and call Medicare directly at the number on your card if you have concerns.",
+    "id": "scam_1787562059344_0",
+    "updated_at": "2026-08-24T09:00:59.344Z"
   },
   {
-    "title": "Fake Package Delivery Texts",
-    "category": "text_scam",
-    "date_reported": "June 2024",
-    "source": "BBB",
-    "how_it_works": "You get a text message saying there is a problem with a package delivery. The message asks you to click a link to fix the issue or pay a fee. The link leads to a fake website that steals your information.",
-    "example_message": "\"Your package is waiting for delivery. Please click here to update your address and pay the $1.50 fee.\"",
-    "red_flags": [
-      "Unexpected text about a package",
-      "Link to click for payment or personal info",
-      "Spelling or grammar mistakes"
-    ],
-    "what_to_do": "Do not click the link. Delete the message and check with the delivery company using their official website.",
-    "id": "scam_1786957271378_1",
-    "updated_at": "2026-08-17T09:01:11.378Z"
-  },
-  {
-    "title": "Social Security Email Phishing",
-    "category": "email_scam",
+    "title": "Fake Tech Support Pop-Up",
+    "category": "tech_support",
     "date_reported": "June 2024",
     "source": "FTC",
-    "how_it_works": "Scammers send emails that look like they are from the Social Security Administration. The email says there is a problem with your account and you need to click a link to fix it. The link goes to a fake site that steals your information.",
-    "example_message": "\"We have detected suspicious activity on your Social Security account. Click here to verify your information or your benefits will be suspended.\"",
+    "how_it_works": "A pop-up appears on your computer saying you have a virus and need to call a number for help. The scammer pretends to be from Microsoft or Apple and tries to get access to your computer or asks for payment.",
+    "example_message": "\"Warning! Your computer is infected. Call Microsoft Support now at 1-800-XXX-XXXX.\"",
     "red_flags": [
-      "Email says your benefits will be suspended",
-      "Asks you to click a link and enter personal info",
-      "Email address is not from ssa.gov"
+      "Pop-up warning with a phone number",
+      "Asked to give remote access to your computer",
+      "Asked to pay in gift cards or wire transfer"
     ],
-    "what_to_do": "Do not click any links. Go to the official Social Security website or call them if you are worried.",
-    "id": "scam_1786957271378_2",
-    "updated_at": "2026-08-17T09:01:11.378Z"
-  },
-  {
-    "title": "Romance Scams on Facebook",
-    "category": "romance_scam",
-    "date_reported": "June 2024",
-    "source": "news outlet name",
-    "how_it_works": "Someone you meet on Facebook or another social media site starts a friendly conversation. They quickly say they love you and ask for money, often for an emergency or travel. They may use fake photos and stories.",
-    "example_message": "\"I want to come visit you but my bank account is frozen. Can you send me $500 for a plane ticket?\"",
-    "red_flags": [
-      "Person you never met asks for money",
-      "They say it’s an emergency",
-      "They avoid video calls or meeting in person"
-    ],
-    "what_to_do": "Never send money to someone you haven’t met in person.",
-    "id": "scam_1786957271378_3",
-    "updated_at": "2026-08-17T09:01:11.378Z"
+    "what_to_do": "Close the pop-up and do not call the number or give anyone access to your computer.",
+    "id": "scam_1787562059344_1",
+    "updated_at": "2026-08-24T09:00:59.344Z"
   },
   {
     "title": "Grandparent Emergency Scam",
     "category": "grandparent_scam",
     "date_reported": "June 2024",
-    "source": "AARP",
-    "how_it_works": "You get a call from someone pretending to be your grandchild or a police officer. They say your grandchild is in trouble and needs money right away for bail or an emergency. They ask you to keep it a secret.",
-    "example_message": "\"Grandma, I’m in jail and need $2,000 for bail. Please don’t tell Mom and Dad!\"",
+    "source": "BBB",
+    "how_it_works": "Someone calls pretending to be your grandchild or a lawyer, saying your grandchild is in trouble and needs money right away. They ask you to send cash or gift cards.",
+    "example_message": "\"Grandma, I’m in jail and need bail money. Please don’t tell mom and dad. Can you send $2,000 right away?\"",
     "red_flags": [
-      "Caller says it’s an emergency and asks for secrecy",
-      "They want money sent by wire or gift cards",
-      "They don’t sound quite like your grandchild"
+      "Caller asks for secrecy",
+      "Urgent request for money",
+      "Asked to pay by gift card or wire transfer"
     ],
-    "what_to_do": "Hang up and call your grandchild or another family member to check the story.",
-    "id": "scam_1786957271378_4",
-    "updated_at": "2026-08-17T09:01:11.378Z"
+    "what_to_do": "Hang up and call your grandchild or another family member directly to check the story.",
+    "id": "scam_1787562059344_2",
+    "updated_at": "2026-08-24T09:00:59.344Z"
+  },
+  {
+    "title": "Social Security Text Scam",
+    "category": "text_scam",
+    "date_reported": "June 2024",
+    "source": "FTC",
+    "how_it_works": "You get a text saying there’s a problem with your Social Security benefits and you must click a link or call a number. The scammers try to steal your information.",
+    "example_message": "\"Your Social Security account is suspended. Click here to reactivate: [fake link]\"",
+    "red_flags": [
+      "Text about Social Security problems",
+      "Links to click or numbers to call",
+      "Threats of losing benefits"
+    ],
+    "what_to_do": "Delete the text and do not click any links or call any numbers.",
+    "id": "scam_1787562059344_3",
+    "updated_at": "2026-08-24T09:00:59.344Z"
+  },
+  {
+    "title": "Romance Scam on Facebook",
+    "category": "romance_scam",
+    "date_reported": "June 2024",
+    "source": "news outlet name",
+    "how_it_works": "A scammer pretends to be a new friend or love interest on Facebook. After building trust, they ask for money for an emergency or travel.",
+    "example_message": "\"I care about you so much, but I need help. My wallet was stolen overseas and I need $1,500 to get home.\"",
+    "red_flags": [
+      "Quick declarations of love",
+      "Requests for money",
+      "Stories about emergencies or travel problems"
+    ],
+    "what_to_do": "Never send money to someone you haven’t met in person, no matter how convincing their story.",
+    "id": "scam_1787562059344_4",
+    "updated_at": "2026-08-24T09:00:59.344Z"
   }
 ]
