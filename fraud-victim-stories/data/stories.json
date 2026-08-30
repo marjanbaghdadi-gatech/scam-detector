@@ -1,5 +1,41 @@
 [
   {
+    "id": "yt-bH8s8aV0peY",
+    "title": "Investment scam victim Nurul Shifa shares her story | DBS x SPF",
+    "source_url": "https://www.youtube.com/watch?v=bH8s8aV0peY",
+    "thumbnail_url": "https://i.ytimg.com/vi/bH8s8aV0peY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAO4n7LpiqXOUS5hzsbWj9Re2C0fg",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "investment_fraud",
+    "summary": "Nurul Shifa recounts her experience as a victim of an investment scam.",
+    "confidence": "high",
+    "date_found": "2026-08-30"
+  },
+  {
+    "id": "yt-gDc4aJDiV3Y",
+    "title": "Man who fell victim to crypto scam fights to get money back",
+    "source_url": "https://www.youtube.com/watch?v=gDc4aJDiV3Y",
+    "thumbnail_url": "https://i.ytimg.com/vi/gDc4aJDiV3Y/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDBME7UBCsJArn_cQo6OnA7VKMgAg",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "crypto_scam",
+    "summary": "A central Ohio man invested over $800,000 in a cryptocurrency scam.",
+    "confidence": "high",
+    "date_found": "2026-08-30"
+  },
+  {
+    "id": "yt-48Lc3uIxiEw",
+    "title": "Fake Banker Stole Millions Through Romance Scam | King Con: The Life and Crimes of Hamish McLaren",
+    "source_url": "https://www.youtube.com/watch?v=48Lc3uIxiEw",
+    "thumbnail_url": "https://i.ytimg.com/vi/48Lc3uIxiEw/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDFxvm2oAQGZAU0Gaq7jDUWrU9u_Q",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "Hamish McLaren posed as a banker on dating apps to steal millions through romance scams.",
+    "confidence": "high",
+    "date_found": "2026-08-30"
+  },
+  {
     "id": "yt-vLCYgb6xzKM",
     "title": "Woman loses life savings after falling victim to romance scam l GMA",
     "source_url": "https://www.youtube.com/watch?v=vLCYgb6xzKM",
@@ -1160,42 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "other",
     "summary": "A video exposes the Pig Butchering Scam, highlighting its deceptive tactics.",
-    "confidence": "high",
-    "date_found": "2026-06-14"
-  },
-  {
-    "id": "yt-pAKdfVgZDT8",
-    "title": "Romance Scam VICTIM Arrested and Interrogated",
-    "source_url": "https://www.youtube.com/watch?v=pAKdfVgZDT8",
-    "thumbnail_url": "https://i.ytimg.com/vi/pAKdfVgZDT8/hq720.jpg?sqp=-oaymwEnCOgCEMoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAlzwr6Nqegct_DHykdhjZyAkqALw",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "A victim of a romance scam is arrested and interrogated.",
-    "confidence": "high",
-    "date_found": "2026-06-14"
-  },
-  {
-    "id": "yt-hURrd0x1cU4",
-    "title": "How Romance Scams Manipulate Your Emotions",
-    "source_url": "https://www.youtube.com/watch?v=hURrd0x1cU4",
-    "thumbnail_url": "https://i.ytimg.com/vi/hURrd0x1cU4/hq720.jpg?sqp=-oaymwEnCOgCEMoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDPzN-bV_KY_ggu9INkSu41ozrWbA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "The video explores how romance scams exploit emotional manipulation.",
-    "confidence": "high",
-    "date_found": "2026-06-14"
-  },
-  {
-    "id": "yt-dahfNc1ibQc",
-    "title": "Woman Leaves Husband For Elon Musk Romance Scam!",
-    "source_url": "https://www.youtube.com/watch?v=dahfNc1ibQc",
-    "thumbnail_url": "https://i.ytimg.com/vi/dahfNc1ibQc/hq720.jpg?sqp=-oaymwEnCOgCEMoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDjq5_b6SufYb-jXq2Y5-1mtA-t9w",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "A woman is scammed into leaving her husband for a fake romance with Elon Musk.",
     "confidence": "high",
     "date_found": "2026-06-14"
   }
