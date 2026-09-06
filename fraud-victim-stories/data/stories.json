@@ -1,5 +1,17 @@
 [
   {
+    "id": "yt-LOPz4_ryviE",
+    "title": "I Was Scammed Of $77k - Here’s What You Need To Learn From My Story",
+    "source_url": "https://www.youtube.com/watch?v=LOPz4_ryviE",
+    "thumbnail_url": "https://i.ytimg.com/vi/LOPz4_ryviE/hq720.jpg?sqp=-oaymwEjCOgCEMoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLBDgEMT0eMZSkD0JylBMYXSzmo7og",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "The victim shares their experience of being scammed out of $77k through a love scam.",
+    "confidence": "high",
+    "date_found": "2026-09-06"
+  },
+  {
     "id": "yt-LkDErn9-zJ8",
     "title": "Fake NFL player arrested for scamming women out of a million dollars",
     "source_url": "https://www.youtube.com/watch?v=LkDErn9-zJ8",
@@ -1184,18 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "romance_scam",
     "summary": "A widow reportedly sent $2.7 million to someone she believed was her online husband, raising suspicions of a romance scam.",
-    "confidence": "high",
-    "date_found": "2026-06-21"
-  },
-  {
-    "id": "yt-Hg6nMCJLrCE",
-    "title": "Cruel Romance Scam Costs Man $1 Million Life Savings",
-    "source_url": "https://www.youtube.com/watch?v=Hg6nMCJLrCE",
-    "thumbnail_url": "https://i.ytimg.com/vi/Hg6nMCJLrCE/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAS9flpnCtxJtPSrcxUsww2uNxNng",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "A man lost his $1 million life savings in a cruel romance scam after a misguided call for Apple Pay support.",
     "confidence": "high",
     "date_found": "2026-06-21"
   }
