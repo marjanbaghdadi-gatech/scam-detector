@@ -34,7 +34,7 @@
   --text-hero: 68px;
 }
 
-html, body { width: 100%; min-height: 100%; }
+html, body { width: 100%; min-height: 100vh; }
 
 body {
   margin: 0;
@@ -967,39 +967,30 @@ body.tool-page .page-hero p { max-width: none; }
 }
 
 /* ── FIT-TO-VIEWPORT (tool page initial view, ≥641px) ─
-   Keeps the header, hero and input cards within one screen
-   with no scrolling, scaling with viewport height. Once the
-   results panel appears (or content otherwise overflows),
-   only .content-area scrolls internally so the header/hero
-   and feedback bar/footer stay put. Phones keep normal
-   page scrolling via the existing ≤640px breakpoint. ─── */
+   Scales the header, hero and input cards with viewport
+   height, but sizes .app to its actual content instead of
+   force-stretching it to fill the screen. When the content
+   is shorter than the viewport, body centers .app + the
+   feedback bar as a group so the leftover space splits
+   evenly above the header and below the button, instead of
+   collecting entirely at the bottom. Once content is taller
+   than the viewport, centering has no effect and the page
+   scrolls normally. Phones keep normal page scrolling via
+   the existing ≤640px breakpoint. ─── */
 @media (min-width: 641px) {
   body.tool-page {
-    height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
 
   body.tool-page .app {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    min-height: 0;
     padding-bottom: 0;
   }
 
-  body.tool-page .topbar { flex: 0 0 auto; padding: clamp(6px, 1.4vh, 14px) 0; }
-
-  body.tool-page .main-frame {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
+  body.tool-page .topbar { padding: clamp(6px, 1.4vh, 14px) 0; }
 
   body.tool-page .page-hero {
-    flex: 0 0 auto;
     padding: clamp(16px, 3.2vh, 48px) clamp(24px, 4vw, 52px);
     min-height: clamp(100px, 20vh, 220px);
   }
@@ -1008,9 +999,6 @@ body.tool-page .page-hero p { max-width: none; }
   body.tool-page .page-hero .updated-badge { margin-bottom: clamp(8px, 1.5vh, 18px); padding: clamp(4px, 0.8vh, 6px) 18px; }
 
   body.tool-page .content-area {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
     padding: clamp(16px, 3vh, 44px) clamp(24px, 4vw, 52px) clamp(16px, 3vh, 56px);
   }
 
@@ -1039,11 +1027,10 @@ body.tool-page .page-hero p { max-width: none; }
   body.tool-page .input-footer { padding-top: clamp(8px, 1.6vh, 20px); }
   body.tool-page .primary-btn { height: clamp(40px, 6.5vh, 58px); font-size: clamp(15px, 2vh, 26px); padding: 0 clamp(16px, 2vw, 30px); }
 
-  body.tool-page .feedback-bar { padding: clamp(12px, 2vh, 32px) 28px; flex: 0 0 auto; }
+  body.tool-page .feedback-bar { padding: clamp(12px, 2vh, 32px) 28px; }
   body.tool-page .feedback-btn { height: clamp(40px, 6vh, 62px); font-size: clamp(15px, 1.8vh, 42px); padding: 0 clamp(18px, 2.4vw, 36px); }
 
   body.tool-page .tool-footer {
-    flex: 0 0 auto;
     padding: clamp(6px, 1vh, 20px) 24px;
     font-size: clamp(10px, 1vh, 12.5px);
     line-height: 1.35;
