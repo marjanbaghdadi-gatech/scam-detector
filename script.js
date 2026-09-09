@@ -44,9 +44,9 @@ let lastResultContext = null;
 const themeBtn = document.querySelector(".theme-btn");
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
-  themeBtn.textContent = "☀";
+  if (themeBtn) themeBtn.textContent = "☀";
 }
-themeBtn.addEventListener("click", () => {
+themeBtn?.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   const isDark = document.body.classList.contains("dark");
   themeBtn.textContent = isDark ? "☀" : "☾";
