@@ -194,7 +194,7 @@ viewFullBtn.addEventListener("click", () => {
 // ── Loading panel ─────────────────────────────────────
 function showLoading(headline) {
   loadingHeadline.textContent = headline;
-  accuracyCard.classList.add("hidden");
+  accuracyCard?.classList.add("hidden");
   resultsPanel.classList.add("hidden");
   loadingPanel.classList.remove("hidden");
   loadingPanel.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -315,12 +315,12 @@ function renderResults(raw) {
   };
 
   // Reset and show accuracy card
-  accuracyThanks.classList.add("hidden");
+  accuracyThanks?.classList.add("hidden");
   document.querySelectorAll(".accuracy-btn").forEach(b => {
     b.disabled = false;
     b.classList.remove("selected");
   });
-  accuracyCard.classList.remove("hidden");
+  accuracyCard?.classList.remove("hidden");
 
   resultsPanel.classList.remove("hidden");
   resultsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -344,7 +344,7 @@ document.querySelectorAll(".accuracy-btn").forEach(btn => {
       b.classList.remove("selected");
     });
     btn.classList.add("selected");
-    accuracyThanks.classList.remove("hidden");
+    accuracyThanks?.classList.remove("hidden");
 
     if (!lastResultContext) return;
     try {
@@ -374,7 +374,7 @@ function showError(error) {
   explanationText.textContent     = error.message;
   plainExplanationText.textContent = "";
   disclaimerText.textContent       = "";
-  accuracyCard.classList.add("hidden");
+  accuracyCard?.classList.add("hidden");
   resultsPanel.classList.remove("hidden");
   resultsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 }
