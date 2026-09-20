@@ -1,5 +1,17 @@
 [
   {
+    "id": "yt-KzrqM5jHPlw",
+    "title": "Celebrity Romance Scams on the Rise",
+    "source_url": "https://www.youtube.com/watch?v=KzrqM5jHPlw",
+    "thumbnail_url": "https://i.ytimg.com/vi/KzrqM5jHPlw/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC2WfFFDIaI368b6I7rYm8FiwCO3Q",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "Scam artists are impersonating celebrities to deceive individuals seeking romantic connections for financial gain.",
+    "confidence": "high",
+    "date_found": "2026-09-20"
+  },
+  {
     "id": "yt-elqZ0Uz9bf8",
     "title": "Inside a romance scam: how to make a catfisher sing",
     "source_url": "https://www.youtube.com/watch?v=elqZ0Uz9bf8",
@@ -1186,17 +1198,5 @@
     "summary": "Stephanie Wood was deceived by a romantic imposter.",
     "confidence": "high",
     "date_found": "2026-07-19"
-  },
-  {
-    "id": "yt-dspG9LCgsP0",
-    "title": "Florida man loses $47,000 in online romance scam",
-    "source_url": "https://www.youtube.com/watch?v=dspG9LCgsP0",
-    "thumbnail_url": "https://i.ytimg.com/vi/dspG9LCgsP0/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDL9EQzlQ4xTfumCOrqcOY40HbMyA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "A Florida man lost $47,000 in an online romance scam.",
-    "confidence": "high",
-    "date_found": "2026-07-12"
   }
 ]
