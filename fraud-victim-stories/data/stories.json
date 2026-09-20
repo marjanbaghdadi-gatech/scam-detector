@@ -1,5 +1,29 @@
 [
   {
+    "id": "yt-lJBzwRcSdGo",
+    "title": "She scammed MULTIPLE Boyfriends by faking Terminal Cancer and a Miscarriage | Love Cheats",
+    "source_url": "https://www.youtube.com/watch?v=lJBzwRcSdGo",
+    "thumbnail_url": "https://i.ytimg.com/vi/lJBzwRcSdGo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAXdRjEOLLtt48L4boWOp3SyAZSTw",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "A woman scammed multiple boyfriends by pretending to have terminal cancer and a miscarriage.",
+    "confidence": "high",
+    "date_found": "2026-09-20"
+  },
+  {
+    "id": "yt-qu9oIGQl3bY",
+    "title": "The Fake NFL Player Who Scammed Women Out of $1.3 Million: Daejon Love EXPOSED",
+    "source_url": "https://www.youtube.com/watch?v=qu9oIGQl3bY",
+    "thumbnail_url": "https://i.ytimg.com/vi/qu9oIGQl3bY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA_9XHsQ5HRulZZluo7f3Rz2Rt0ZA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "Daejon Love posed as an NFL player and defrauded women out of $1.3 million.",
+    "confidence": "high",
+    "date_found": "2026-09-20"
+  },
+  {
     "id": "yt-V_ZvuOtDatE",
     "title": "Scams and Frauds | 60 Minutes Marathon",
     "source_url": "https://www.youtube.com/watch?v=V_ZvuOtDatE",
@@ -1174,29 +1198,5 @@
     "summary": "A man recounts his experience of being scammed by his Filipina wife.",
     "confidence": "high",
     "date_found": "2026-07-12"
-  },
-  {
-    "id": "yt-LgVb49mx-oA",
-    "title": "He stole $230,000,000 // The Malone Lam story",
-    "source_url": "https://www.youtube.com/watch?v=LgVb49mx-oA",
-    "thumbnail_url": "https://i.ytimg.com/vi/LgVb49mx-oA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBoir8ZnLNtihqBYRA2ZUmGbl3XcA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "crypto_scam",
-    "summary": "Malone Lam and his friends allegedly stole $230,000,000 worth of cryptocurrency.",
-    "confidence": "high",
-    "date_found": "2026-07-12"
-  },
-  {
-    "id": "yt-tzXRb8PdmJo",
-    "title": "Saving a Victim from a 7 Year Scam",
-    "source_url": "https://www.youtube.com/watch?v=tzXRb8PdmJo",
-    "thumbnail_url": "https://i.ytimg.com/vi/tzXRb8PdmJo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAXiZLVygJbKlhLcFlf0VHwovcTeA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "other",
-    "summary": "An older woman was saved from a 7-year scam.",
-    "confidence": "high",
-    "date_found": "2026-07-05"
   }
 ]
