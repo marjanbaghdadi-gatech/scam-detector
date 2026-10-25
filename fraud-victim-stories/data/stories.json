@@ -1,5 +1,41 @@
 [
   {
+    "id": "yt-JN_d89-FEKk",
+    "title": "How 2 Kids Scammed the Pentagon",
+    "source_url": "https://www.youtube.com/watch?v=JN_d89-FEKk",
+    "thumbnail_url": "https://i.ytimg.com/vi/JN_d89-FEKk/hq720_custom_2.jpg?sqp=CMD99dYG-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDAhg7VGrEjO6dmA2u4XF4zQKBwOw",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "government_impersonation",
+    "summary": "Two kids managed to defraud the Pentagon in a notorious scam.",
+    "confidence": "high",
+    "date_found": "2026-10-25"
+  },
+  {
+    "id": "yt-CIe-P2DetLw",
+    "title": "\"Words with Friends\" Scam | A Perfect Scam",
+    "source_url": "https://www.youtube.com/watch?v=CIe-P2DetLw",
+    "thumbnail_url": "https://i.ytimg.com/vi/CIe-P2DetLw/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC9zxHacG8We826iqYoISjEdcvumw",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "other",
+    "summary": "A retired couple in Arizona falls victim to a scam related to the game 'Words with Friends'.",
+    "confidence": "high",
+    "date_found": "2026-10-25"
+  },
+  {
+    "id": "yt-FDpW7SeqhSA",
+    "title": "All American Scams | American Greed",
+    "source_url": "https://www.youtube.com/watch?v=FDpW7SeqhSA",
+    "thumbnail_url": "https://i.ytimg.com/vi/FDpW7SeqhSA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLACU_NtA40IiRu_JTdT0WcKpixYMQ",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "other",
+    "summary": "The video revisits multiple American Greed episodes featuring various scams.",
+    "confidence": "high",
+    "date_found": "2026-10-25"
+  },
+  {
     "id": "yt-5xkE24QxIBs",
     "title": "UNBELIEVABLE! Scam Victim Reveals She Lost $675,000 — Then Was Told to Pay in a Specific Crypto Coin",
     "source_url": "https://www.youtube.com/watch?v=5xkE24QxIBs",
@@ -1160,42 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "investment_fraud",
     "summary": "A woman lost £170,000 in an investment scam after selling her house.",
-    "confidence": "high",
-    "date_found": "2026-08-09"
-  },
-  {
-    "id": "yt-STYNYRvWkks",
-    "title": "76-year-old loses $1.6 million savings to AI investment scam",
-    "source_url": "https://www.youtube.com/watch?v=STYNYRvWkks",
-    "thumbnail_url": "https://i.ytimg.com/vi/STYNYRvWkks/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC_D_zFbVIyMNwceod9z3lqXOOZRA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "investment_fraud",
-    "summary": "A 76-year-old man lost $1.6 million to an AI investment scam.",
-    "confidence": "high",
-    "date_found": "2026-08-09"
-  },
-  {
-    "id": "yt-ntrGrfvvkII",
-    "title": "Scam Victim Story: Why do People Fall for SCAMS Anyway?",
-    "source_url": "https://www.youtube.com/watch?v=ntrGrfvvkII",
-    "thumbnail_url": "https://i.ytimg.com/vi/ntrGrfvvkII/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCLGu5oCZGf-CqHOIZzG4rqJTEW3w",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "phishing",
-    "summary": "An intelligent young adult fell victim to phishing despite their capabilities.",
-    "confidence": "high",
-    "date_found": "2026-08-09"
-  },
-  {
-    "id": "yt-hY6gfmJAG-Y",
-    "title": "A Victim's Story: How investment scammers tricked me out of £210,000",
-    "source_url": "https://www.youtube.com/watch?v=hY6gfmJAG-Y",
-    "thumbnail_url": "https://i.ytimg.com/vi/hY6gfmJAG-Y/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAWiA57iwHldtVxCwdCbE5Xqqazxg",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "investment_fraud",
-    "summary": "A victim lost £210,000 to investment scammers.",
     "confidence": "high",
     "date_found": "2026-08-09"
   }
