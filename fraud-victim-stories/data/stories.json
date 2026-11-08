@@ -1,5 +1,41 @@
 [
   {
+    "id": "yt-e4yCVXHMj8U",
+    "title": "Two Women Take on the Romance Scammers | Love Rats 107",
+    "source_url": "https://www.youtube.com/watch?v=e4yCVXHMj8U",
+    "thumbnail_url": "https://i.ytimg.com/vi/e4yCVXHMj8U/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAAZoZ-3ntZx7076nz6qz5COCGJBA",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "Two women fall victim to online romance scams costing them thousands but find help through the police.",
+    "confidence": "high",
+    "date_found": "2026-11-08"
+  },
+  {
+    "id": "yt-xPY_AIc9cWc",
+    "title": "Romance Scam Victim Lost $1.6 Million Dollars in Crypto Scam | Lang’s Interview",
+    "source_url": "https://www.youtube.com/watch?v=xPY_AIc9cWc",
+    "thumbnail_url": "https://i.ytimg.com/vi/xPY_AIc9cWc/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBYgZl3BZFTC1-d5Ocm1wRA4VG02Q",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "A victim lost $1.6 million due to a romance-related crypto scam.",
+    "confidence": "high",
+    "date_found": "2026-11-08"
+  },
+  {
+    "id": "yt-sMqzvFQoXi4",
+    "title": "The Romance Scam That Fooled 88 Women | A Perfect Scam",
+    "source_url": "https://www.youtube.com/watch?v=sMqzvFQoXi4",
+    "thumbnail_url": "https://i.ytimg.com/vi/sMqzvFQoXi4/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAlYraHvcIEI1jib41-nRdSiBVVFw",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "romance_scam",
+    "summary": "88 women fall victim to a romance fraud scheme run by Rubbin Sarpong.",
+    "confidence": "high",
+    "date_found": "2026-11-08"
+  },
+  {
     "id": "yt-ncDp5sLzI68",
     "title": "'This can’t be true': Michael devastated after romance scam | A Current Affair",
     "source_url": "https://www.youtube.com/watch?v=ncDp5sLzI68",
@@ -1160,42 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "romance_scam",
     "summary": "A survivor of a romance scam shares her experience and helps others through advocacy.",
-    "confidence": "high",
-    "date_found": "2026-08-23"
-  },
-  {
-    "id": "yt-RDnNJ_iehoU",
-    "title": "Scam victim issues warning after losing $750,000 of life savings | A Current Affair",
-    "source_url": "https://www.youtube.com/watch?v=RDnNJ_iehoU",
-    "thumbnail_url": "https://i.ytimg.com/vi/RDnNJ_iehoU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDhWRvMH-JBsAtbm7qU8DrCe8qonA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "investment_fraud",
-    "summary": "A victim lost $750,000 of life savings due to a scam.",
-    "confidence": "high",
-    "date_found": "2026-08-23"
-  },
-  {
-    "id": "yt-0cXlqF_djwQ",
-    "title": "How Scammers Turned ME Into Their Next Victim | Fraud Wars",
-    "source_url": "https://www.youtube.com/watch?v=0cXlqF_djwQ",
-    "thumbnail_url": "https://i.ytimg.com/vi/0cXlqF_djwQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDAFsDJixHH34wIHnsPqB30JT8I9w",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "phishing",
-    "summary": "Mary Ellen Strange was scammed out of $400K through a fake Amazon fraud protection call.",
-    "confidence": "high",
-    "date_found": "2026-08-23"
-  },
-  {
-    "id": "yt-0Gg-Bjvm7L8",
-    "title": "Widow loses $430,000 in romance scam - NBC 15 WPMI",
-    "source_url": "https://www.youtube.com/watch?v=0Gg-Bjvm7L8",
-    "thumbnail_url": "https://i.ytimg.com/vi/0Gg-Bjvm7L8/hq720.jpg?sqp=-oaymwE2COgCEMoBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARhlIGUoZTAP&rs=AOn4CLBPAjmqYvsTkZ-iGgO6fgc9m9MN2A",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "A widow lost $430,000 over an eight-year period due to a romance scam involving three men.",
     "confidence": "high",
     "date_found": "2026-08-23"
   }
