@@ -1,5 +1,17 @@
 [
   {
+    "id": "yt-UR0VPinSmbg",
+    "title": "Fraud Victim? Here's How To Recover (And Get Your Money Back!) | Aura",
+    "source_url": "https://www.youtube.com/watch?v=UR0VPinSmbg",
+    "thumbnail_url": "https://i.ytimg.com/vi/UR0VPinSmbg/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCq1wuPwZmssXNEziEKn1LRRPZXcg",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "other",
+    "summary": "The video provides guidance for victims of fraud on how to recover and reclaim lost funds.",
+    "confidence": "high",
+    "date_found": "2026-11-08"
+  },
+  {
     "id": "yt-RDnNJ_iehoU",
     "title": "Scam victim issues warning after losing $750,000 of life savings | A Current Affair",
     "source_url": "https://www.youtube.com/watch?v=RDnNJ_iehoU",
@@ -1184,18 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "other",
     "summary": "Two Scottish rappers deceive audiences by posing as LA-based artists.",
-    "confidence": "high",
-    "date_found": "2026-08-30"
-  },
-  {
-    "id": "yt-YXu289P-dD4",
-    "title": "The Fake Socialite Who Scammed New York's Elite - The Vault",
-    "source_url": "https://www.youtube.com/watch?v=YXu289P-dD4",
-    "thumbnail_url": "https://i.ytimg.com/vi/YXu289P-dD4/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAF2PS7mbmHJleEDhRgiWeRCKPVDg",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "identity_theft",
-    "summary": "Anna Delvey posed as a wealthy socialite to deceive New York's elite.",
     "confidence": "high",
     "date_found": "2026-08-30"
   }
