@@ -1,5 +1,41 @@
 [
   {
+    "id": "yt-bH8s8aV0peY",
+    "title": "Investment scam victim Nurul Shifa shares her story | DBS x SPF",
+    "source_url": "https://www.youtube.com/watch?v=bH8s8aV0peY",
+    "thumbnail_url": "https://i.ytimg.com/vi/bH8s8aV0peY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAO4n7LpiqXOUS5hzsbWj9Re2C0fg",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "investment_fraud",
+    "summary": "Nurul Shifa recounts her experience as a victim of an investment scam that led her to dream of financial gains.",
+    "confidence": "high",
+    "date_found": "2026-11-22"
+  },
+  {
+    "id": "yt-vokxRpKun0Y",
+    "title": "2 charged in $600 million investment fraud scheme",
+    "source_url": "https://www.youtube.com/watch?v=vokxRpKun0Y",
+    "thumbnail_url": "https://i.ytimg.com/vi/vokxRpKun0Y/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD8cgGvQkJNUa9C5OhrI6Z3WOmj9g",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "investment_fraud",
+    "summary": "Two men allegedly led a $600 million scheme defrauding 2000 investors.",
+    "confidence": "high",
+    "date_found": "2026-11-22"
+  },
+  {
+    "id": "yt-Kfdj3AfDD74",
+    "title": "How This 31 Year Old Woman Scammed JP Morgan",
+    "source_url": "https://www.youtube.com/watch?v=Kfdj3AfDD74",
+    "thumbnail_url": "https://i.ytimg.com/vi/Kfdj3AfDD74/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCn9SCIWF5TplUwKeHQd3jKYO5U3Q",
+    "media_type": "video",
+    "source_platform": "youtube",
+    "fraud_category": "other",
+    "summary": "A young entrepreneur scammed JP Morgan through deceitful means.",
+    "confidence": "high",
+    "date_found": "2026-11-22"
+  },
+  {
     "id": "yt-108UWM1jsF8",
     "title": "Victim of Romance Scam Tells Her Story",
     "source_url": "https://www.youtube.com/watch?v=108UWM1jsF8",
@@ -1160,42 +1196,6 @@
     "source_platform": "youtube",
     "fraud_category": "romance_scam",
     "summary": "The video discusses how emotions are manipulated in romance scams.",
-    "confidence": "high",
-    "date_found": "2026-09-06"
-  },
-  {
-    "id": "yt-T9kUBCawqnI",
-    "title": "Their Perfect Life Was Not What It Seemed | A Perfect Scam",
-    "source_url": "https://www.youtube.com/watch?v=T9kUBCawqnI",
-    "thumbnail_url": "https://i.ytimg.com/vi/T9kUBCawqnI/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB8lDCqCmawNnmoaAVwPyxyXvo_lw",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "A young man is deceived while trying to meet someone from a dating app.",
-    "confidence": "high",
-    "date_found": "2026-09-06"
-  },
-  {
-    "id": "yt-EXlAmAGHO5Y",
-    "title": "Holiday Love Rats Exposed | A True Story",
-    "source_url": "https://www.youtube.com/watch?v=EXlAmAGHO5Y",
-    "thumbnail_url": "https://i.ytimg.com/vi/EXlAmAGHO5Y/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC2Jx-YugLXRDeNPwH8dZa3894tPA",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "The documentary reveals the experiences of women deceived in the name of love.",
-    "confidence": "high",
-    "date_found": "2026-09-06"
-  },
-  {
-    "id": "yt-eOSQnLaEy-A",
-    "title": "Conman EXPOSED: Meet Australia's answer to the Tinder Swindler | 60 Minutes Australia",
-    "source_url": "https://www.youtube.com/watch?v=eOSQnLaEy-A",
-    "thumbnail_url": "https://i.ytimg.com/vi/eOSQnLaEy-A/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAMzR5ypWhcPKH7TKUj_LR1P2eXIQ",
-    "media_type": "video",
-    "source_platform": "youtube",
-    "fraud_category": "romance_scam",
-    "summary": "The story reveals the exploits of a conman who deceived victims through romantic scams.",
     "confidence": "high",
     "date_found": "2026-09-06"
   }
